@@ -12,11 +12,12 @@ interface GroupOptionProps {
 }
 
 const GroupOption: React.FC<GroupOptionProps> = ({ group, isSelected }) => {
-  const { setCurrentGroup, setIsGroupSelectSheetOpen } = useHomePageStore();
+  const { setCurrentGroup, setIsGroupSelectSheetOpen, setActiveTab } = useHomePageStore();
   const navigate = useNavigate();
 
   const handleClick = (group: Group) => {
     setCurrentGroup(group);
+    setActiveTab('전체');
     setIsGroupSelectSheetOpen(false);
     navigate(`/main/${group.channelId}`);
   };

@@ -1,5 +1,4 @@
 import BottomSheet from '@/components/common/bottomSheet/BottomSheet';
-import UnderlineBtn from '@/components/common/button/UnderlineBtn/UnderlineBtn';
 import GroupOptions from '@/components/home/GroupSelectSheet/GroupOptions/GroupOptions';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';

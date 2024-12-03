@@ -20,6 +20,9 @@ interface HomePageState {
 
   homePageNumber: number;
   setHomePageNumber: (newPage: number) => void;
+
+  activeTab: string;
+  setActiveTab: (newActiveTab: string) => void;
 }
 
 const useHomePageStore = create<HomePageState>(set => ({
@@ -40,6 +43,9 @@ const useHomePageStore = create<HomePageState>(set => ({
 
   homePageNumber: 0,
   setHomePageNumber: newPageNumber => set({ homePageNumber: newPageNumber }),
+
+  activeTab: '전체',
+  setActiveTab: newActiveTab => set({ activeTab: newActiveTab }),
 }));
 
 export default useHomePageStore;

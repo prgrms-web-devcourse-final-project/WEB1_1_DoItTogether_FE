@@ -8,14 +8,14 @@ interface Charger {
 
 export interface TabProps {
   activeTab: string;
-  handleSetActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  handleSetActiveTab: (newActiveTab: string) => void;
   chargers: Charger[];
 }
 
 const Tab: React.FC<TabProps> = ({ activeTab, handleSetActiveTab, chargers }) => {
   return (
-    <Tabs defaultValue={activeTab} onValueChange={handleSetActiveTab}>
-      <TabsList className='bg-white h-15 flex w-full justify-start overflow-x-auto overflow-y-hidden rounded-none p-0 px-5 no-scrollbar'>
+    <Tabs defaultValue={activeTab} onValueChange={handleSetActiveTab} value={activeTab}>
+      <TabsList className='h-15 flex w-full justify-start overflow-x-auto overflow-y-hidden rounded-none bg-white p-0 px-5 no-scrollbar'>
         {chargers?.map(charger => (
           <TabItem key={charger.name} name={charger.name} value={charger.name} />
         ))}
