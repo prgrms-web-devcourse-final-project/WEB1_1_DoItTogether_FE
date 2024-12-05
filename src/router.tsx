@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom';
 
 import MainLayout from '@/layout/MainLayout';
 import StatisticsLayout from '@/layout/StatisticsLayout';
@@ -24,28 +24,31 @@ import HouseWorkStepTwoPage from '@/pages/HouseWorkStepTwoPage';
 import GroupInviteReceivePage from '@/pages/GroupInviteReceivePage';
 import ScrollToTop from '@/components/common/scroll/ScrollToTop';
 import { Toaster } from '@/components/common/ui/toaster';
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const RootLayout = () => {
-  // const location = useLocation();
-
-  // main 경로에 대해서는 애니메이션 제외
-  // const shouldAnimate = !location.pathname.startsWith('/main');
+  const location = useLocation();
+  const pathname = location.pathname.split('/')[1];
 
   return (
     <>
       <ScrollToTop />
-      {/* {shouldAnimate ? (
-        <TransitionGroup>
-          <CSSTransition key={location.pathname} timeout={300} classNames='page'>
-            <div className='page'> */}
-      <Outlet />
-      {/* </div>
-          </CSSTransition>
-        </TransitionGroup>
-      ) : (
-        <Outlet />
-      )} */}
+      <AnimatePresence mode='wait'>
+        <motion.div
+          key={pathname}
+          initial={{ opacity: 0, x: 40 }} // x값을 약간 줄임
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            type: 'spring',
+            stiffness: 80, // 강성을 낮춤 (더 부드러워짐)
+            damping: 17, // 감쇠를 조정
+            mass: 0.8, // 질량 추가 (더 자연스러운 움직임)
+            duration: 0.4, // 지속시간 약간 증가
+          }}
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
       <Toaster />
     </>
   );
