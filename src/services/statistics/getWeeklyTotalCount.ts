@@ -4,7 +4,7 @@ import { GetWeeklyTotalCountReq, GetWeeklyTotalCountRes } from '@/types/apis/sta
 export const getWeeklyTotalCount = async ({ channelId, targetDate }: GetWeeklyTotalCountReq) => {
   try {
     const response = await axiosInstance.get<GetWeeklyTotalCountRes>(
-      `/api/v1/channels/${channelId}/statistics/weekly/${targetDate}/totalCount`,
+      `/api/v1/channels/${channelId}/statistics/weekly/totalCount`,
       { params: { targetDate } }
     );
     return response.data;

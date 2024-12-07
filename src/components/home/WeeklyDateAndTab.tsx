@@ -10,7 +10,7 @@ const WeeklyDateAndTab: React.FC<WeeklyDateAndTabProps> = ({
   chargers,
 }) => {
   return (
-    <div className='bg-white sticky top-0 z-10'>
+    <div className='sticky top-0 z-10 bg-white'>
       <WeeklyDate />
       <Tab activeTab={activeTab} handleSetActiveTab={handleSetActiveTab} chargers={chargers} />
     </div>

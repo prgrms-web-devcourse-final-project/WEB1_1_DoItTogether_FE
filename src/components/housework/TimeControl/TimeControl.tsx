@@ -32,8 +32,6 @@ const TimeControl: React.FC<TimeControlProps> = ({ onTimeChange }) => {
     }
   };
 
-  console.log(selectedTime);
-
   const handleTimeChange = (time: SelectedTime) => {
     setSelectedTime(time);
     onTimeChange(time);
@@ -57,7 +55,7 @@ const TimeControl: React.FC<TimeControlProps> = ({ onTimeChange }) => {
             <p>하루종일 하기</p>
           </Label>
         ) : (
-          <Label htmlFor='time-mode' className='flex items-center gap-4 text-gray'>
+          <Label htmlFor='time-mode' className='text-gray flex items-center gap-4'>
             <ClockIcon />
             <p>시작시간이 언제인가요?</p>
           </Label>

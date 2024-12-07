@@ -12,16 +12,9 @@ const useWeeklyStatistics = () => {
     useWeeklyStateStore();
 
   useEffect(() => {
-    // TODO API 개발 후, 주석풀고 임시값 제거
-    // getTotalCountData();
+    getTotalCountData();
     getScoreCountData();
-    setTotalCountData({
-      completeCount: 10,
-      notCompleteCount: 3,
-      complimentCount: 10,
-      pokeCount: 3,
-    });
-  }, []);
+  }, [currentDate]);
 
   const getTotalCountData = async () => {
     try {
@@ -42,9 +35,6 @@ const useWeeklyStatistics = () => {
       console.error('주간 통계 랭킹 데이터 조회 실패', error);
     }
   };
-
-  // TODO Remove
-  console.log(getTotalCountData, getScoreCountData);
 
   const handlePrevWeek = () => {
     setCurrentDate((prevDate: Date) => {

@@ -24,8 +24,8 @@ const ManagerItem: React.FC<ManagerItemProps> = ({
         };
       default:
         return {
-          icon: 'bg-gray1',
-          text: 'text-gray4',
+          icon: 'bg-gray3',
+          text: 'text-gray3',
         };
     }
   };
@@ -42,7 +42,7 @@ const ManagerItem: React.FC<ManagerItemProps> = ({
           <ProfileIcon
             width={16}
             height={16}
-            className={selectState === 'selected' ? 'text-sub' : 'text-gray3'}
+            className={selectState === 'selected' ? 'text-sub' : 'text-gray4'}
           />
         </div>
         <div className={`font-body ${styles.text}`}>{name}</div>

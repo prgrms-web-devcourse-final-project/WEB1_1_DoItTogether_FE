@@ -34,6 +34,10 @@ import {
   MonthlyHeartIcon,
   MonthFingerIcon,
   TrashCanIcon,
+  BroomDustIcon,
+  BubbleIcon,
+  ShinyIcon,
+  ProfileDefaultIcon,
 } from '@/components/common/icon';
 import EnterIcon from '@/components/common/icon/EnterIcon';
 
@@ -175,14 +179,30 @@ const IconView = () => {
       <div className='flex flex-col items-center gap-2'>
         <p className='text-sm text-gray-600'>MonthlyHeartIcon</p>
         <MonthlyHeartIcon />
-        <div className='flex flex-col items-center gap-2'>
-          <p className='text-sm text-gray-600'>EnterIcon</p>
-          <EnterIcon />
-        </div>
+      </div>
+      <div className='flex flex-col items-center gap-2'>
+        <p className='text-sm text-gray-600'>EnterIcon</p>
+        <EnterIcon />
       </div>
       <div className='flex flex-col items-center gap-2'>
         <p className='text-sm text-gray-600'>TrashCanIcon</p>
         <TrashCanIcon />
+      </div>
+      <div className='flex flex-col items-center gap-2'>
+        <p className='text-sm text-gray-600'>BroomDustIcon</p>
+        <BroomDustIcon />
+      </div>
+      <div className='flex flex-col items-center gap-2'>
+        <p className='text-sm text-gray-600'>BubbleIcon</p>
+        <BubbleIcon />
+      </div>
+      <div className='flex flex-col items-center gap-2'>
+        <p className='text-sm text-gray-600'>ShinyIcon</p>
+        <ShinyIcon />
+      </div>
+      <div className='flex flex-col items-center gap-2'>
+        <p className='text-sm text-gray-600'>ProfileDefaultIcon</p>
+        <ProfileDefaultIcon />
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ const GroupCreatePage = () => {
   };
 
   return (
-    <div className='flex h-screen flex-col'>
+    <div className={`flex h-screen flex-col`}>
       <Header title='방만들기' isNeededDoneBtn={false} handleBack={handleBack} />
       <div className='flex-1'>
         {step === 'roomName' && (

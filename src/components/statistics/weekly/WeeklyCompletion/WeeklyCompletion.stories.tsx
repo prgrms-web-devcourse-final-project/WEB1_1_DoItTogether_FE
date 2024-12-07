@@ -13,8 +13,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    groupName: '우리집',
-    completed: 2,
-    notCompleted: 2,
+    channelName: '우리집',
+    completeCount: 2,
+    unCompletedCount: 2,
   },
 };

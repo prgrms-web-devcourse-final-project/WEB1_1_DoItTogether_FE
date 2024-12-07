@@ -1,10 +1,12 @@
+import LottieIcon from '@/components/common/lottie/LottieIcon';
+
 const SurveyIntroIcon = () => {
   {
     /* TODO 그래픽요소로 변경*/
   }
   return (
-    <div className='flex items-center justify-center'>
-      <div className='h-56 w-56 rounded-full border bg-gray4' />
+    <div className='flex flex-1 items-center justify-center'>
+      <LottieIcon />
     </div>
   );
 };

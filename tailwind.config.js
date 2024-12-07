@@ -8,9 +8,6 @@ export default {
       fontFamily: {
         Pretendard: ['Pretendard'],
       },
-      backgroundImage: {
-        'custom-gradient': 'linear-gradient(to bottom, #1FCFBA 50%, #FFFFFF 100%)',
-      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -90,6 +87,7 @@ export default {
       gray3_30: 'rgba(198, 200, 208, 0.3)',
       gray4: 'rgba(232, 233, 236, 1)',
       gray5: 'rgba(242, 243, 246, 1)',
+      gray6: '#B5B4B4',
 
       kakao: '#FEE500',
       rank1: '#FFDD00',
@@ -112,6 +110,9 @@ export default {
     },
     maxWidth: {
       DEFAULT: '430px',
+    },
+    screens: {
+      xs: '370px',
     },
   },
   plugins: [

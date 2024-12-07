@@ -14,10 +14,11 @@ import {
   DUMMY_QUESTION_STEP2,
   DUMMY_QUESTION_STEP3,
   DUMMY_QUESTION_STEP4,
-  DUMMY_RESULT,
 } from '@/constants/onBoarding';
 import { motion } from 'framer-motion';
 import { postPersonalKeyword } from '@/services/onboarding/postPersonalKeyword';
+import { patchMyInitState } from '@/services/user/patchMyInitState';
+import { getMyInfo } from '@/services/user/getMyInfo';
 
 interface OnBoardingProps {}
 
@@ -27,9 +28,26 @@ const OnBoarding: React.FC<OnBoardingProps> = ({}) => {
   const [answer, setAnswer] = useState<string[]>([]); // 사용자 답변
   const [isCompleted, setIsCompleted] = useState<boolean>(false); // 분석완료 여부
   const [result, setResult] = useState<string[]>([]); // 분석 결과
-  const [username] = useState<string>('사용자'); // 사용자명
+  const [username, setUserName] = useState<string>('사용자'); // 사용자명
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMyInfo = async () => {
+      try {
+        const response = await getMyInfo();
+        setUserName(response.result.nickName);
+      } catch (error) {
+        console.error('내 정보 조회 실패:', error);
+      }
+    };
+
+    fetchMyInfo();
+  }, []);
+
+  useEffect(() => {
+    if (step === 0) navigate('/survey-intro');
+  }, [step]);
 
   const item = {
     hidden: { opacity: 0 },
@@ -61,8 +79,7 @@ const OnBoarding: React.FC<OnBoardingProps> = ({}) => {
           surveyResultText: answer,
         });
 
-        console.log(response);
-        setResult(DUMMY_RESULT); //만약 result가 return되면 여기에 set
+        setResult(response.result.keywords); //만약 result가 return되면 여기에 set
 
         setIsCompleted(true); //분석이 완료되었습니다.
         await new Promise(resolve => setTimeout(resolve, 1000)); //1초동안 분석되었습니다.가 뜸..
@@ -76,7 +93,13 @@ const OnBoarding: React.FC<OnBoardingProps> = ({}) => {
     }
 
     if (step === 5) {
-      navigate('/group-select');
+      try {
+        await patchMyInitState();
+        navigate('/group-select');
+      } catch (error) {
+        console.error('초기 상태 변경 실패:', error);
+      }
+      return;
     }
 
     setStep(prev => prev + 1); // step 4가 아닐 때만 실행
@@ -93,16 +116,11 @@ const OnBoarding: React.FC<OnBoardingProps> = ({}) => {
 
   const isStepVaild = () => {
     if (step === 5) return true; //결과는 항상 활성화
-    return answer[step] !== ''; //빈값이 아니면 true
+    return answer.length >= step;
   };
 
-  useEffect(() => {
-    if (step === 0) navigate('/survey-intro');
-    console.log(answer);
-  }, [step]);
-
   return (
-    <div className='flex h-screen flex-col overflow-hidden'>
+    <div className={`flex h-screen flex-col overflow-hidden`}>
       {step <= 4 && (
         <motion.div variants={item} initial='hidden' animate='show'>
           <div className='p-5'>
@@ -113,7 +131,7 @@ const OnBoarding: React.FC<OnBoardingProps> = ({}) => {
       )}
 
       {loading ? (
-        <div className='h-full px-0 pt-28'>
+        <div className='h-full px-0'>
           <LoadingScreen username={username} isCompleted={isCompleted} />
         </div>
       ) : (

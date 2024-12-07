@@ -1,4 +1,4 @@
-import { Category } from '@/constants/Category';
+import { Category } from '@/constants';
 
 interface PresetItem {
   // 프리셋 아이템 아이디
@@ -26,7 +26,8 @@ export const PresetDefault: PresetList[] = [
       { presetItemId: 104, name: '진공청소기 돌리기' },
       { presetItemId: 105, name: '바닥 걸레질' },
       { presetItemId: 106, name: '창문 청소' },
-      { presetItemId: 107, name: '카펫 및 러그 청소' },
+      { presetItemId: 107, name: '카펫 청소' },
+      { presetItemId: 108, name: '러그 청소' },
     ],
   },
   {
@@ -47,27 +48,35 @@ export const PresetDefault: PresetList[] = [
     category: Category.KITCHEN,
     presetItemList: [
       { presetItemId: 301, name: '설거지' },
-      { presetItemId: 302, name: '조리대 및 싱크대 닦기' },
-      { presetItemId: 303, name: '쓰레기통 비우기' },
-      { presetItemId: 304, name: '냉장고 정리' },
-      { presetItemId: 305, name: '오븐 및 전자레인지 청소' },
-      { presetItemId: 306, name: '바닥 진공청소기 및 걸레질' },
-      { presetItemId: 307, name: '찬장 및 서랍 정리' },
-      { presetItemId: 308, name: '환풍기 필터 청소' },
+      { presetItemId: 302, name: '조리대 닦기' },
+      { presetItemId: 303, name: '싱크대 닦기' },
+      { presetItemId: 304, name: '쓰레기통 비우기' },
+      { presetItemId: 305, name: '냉장고 정리' },
+      { presetItemId: 306, name: '오븐 청소' },
+      { presetItemId: 307, name: '전자레인지 청소' },
+      { presetItemId: 308, name: '바닥 진공청소기 돌리기' },
+      { presetItemId: 309, name: '바닥 걸레질' },
+      { presetItemId: 310, name: '찬장 정리' },
+      { presetItemId: 311, name: '서랍 정리' },
+      { presetItemId: 312, name: '환풍기 필터 청소' },
     ],
   },
   {
     presetCategoryId: 4,
     category: Category.BATH_ROOM,
     presetItemList: [
-      { presetItemId: 401, name: '세면대 및 거울 닦기' },
-      { presetItemId: 402, name: '변기 청소' },
-      { presetItemId: 403, name: '샤워기 및 욕조 물기 닦기' },
-      { presetItemId: 404, name: '바닥 및 타일 청소' },
-      { presetItemId: 405, name: '샤워 커튼 및 욕조 청소' },
-      { presetItemId: 406, name: '휴지통 비우기' },
-      { presetItemId: 407, name: '배수구 청소' },
-      { presetItemId: 408, name: '환풍기 필터 청소' },
+      { presetItemId: 401, name: '세면대 닦기' },
+      { presetItemId: 402, name: '거울 닦기' },
+      { presetItemId: 403, name: '변기 청소' },
+      { presetItemId: 404, name: '샤워기 물기 닦기' },
+      { presetItemId: 405, name: '욕조 물기 닦기' },
+      { presetItemId: 406, name: '바닥 청소' },
+      { presetItemId: 407, name: '타일 청소' },
+      { presetItemId: 408, name: '샤워 커튼 청소' },
+      { presetItemId: 409, name: '욕조 청소' },
+      { presetItemId: 410, name: '휴지통 비우기' },
+      { presetItemId: 411, name: '배수구 청소' },
+      { presetItemId: 412, name: '환풍기 필터 청소' },
     ],
   },
   {

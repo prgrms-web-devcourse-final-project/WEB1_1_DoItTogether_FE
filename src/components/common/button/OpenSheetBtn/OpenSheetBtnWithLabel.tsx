@@ -27,10 +27,10 @@ const OpenSheetBtnWithLabel: React.FC<OpenSheetBtnWithLabelProps> = ({
       <Button
         variant='group'
         size='large'
-        className='justify-between bg-white px-3 text-gray'
+        className='text-gray justify-between bg-white px-3'
         onClick={handleClick}
       >
-        <div className='flex items-center gap-x-4'>
+        <div className='flex items-center gap-x-4 font-body'>
           <div>{icon}</div>
           {displayValue}
         </div>

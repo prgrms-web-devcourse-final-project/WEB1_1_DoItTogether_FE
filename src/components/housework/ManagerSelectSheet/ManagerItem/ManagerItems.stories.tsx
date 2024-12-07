@@ -8,10 +8,6 @@ const meta = {
   component: ManagerItems,
   tags: ['autodocs'],
   argTypes: {
-    isAiCardOpen: {
-      description: 'AI 카드가 열려있는지 여부',
-      control: 'boolean',
-    },
     selectedValue: {
       description: '선택된 멤버',
       control: 'number',
@@ -29,18 +25,34 @@ export default meta;
 
 // 더미 데이터
 const dummyMembers: User[] = [
-  { userId: 1, email: 'member1@example.com', nickName: '멤버1', role: 'PARTICIPANT' },
-  { userId: 2, email: 'member2@example.com', nickName: '멤버2', role: 'ADMIN' },
-  { userId: 3, email: 'member3@example.com', nickName: '멤버3', role: 'PARTICIPANT' },
+  {
+    userId: 1,
+    email: 'member1@example.com',
+    nickName: '멤버1',
+    role: 'PARTICIPANT',
+    currentUser: false,
+  },
+  {
+    userId: 2,
+    email: 'member2@example.com',
+    nickName: '멤버2',
+    role: 'ADMIN',
+    currentUser: false,
+  },
+  {
+    userId: 3,
+    email: 'member3@example.com',
+    nickName: '멤버3',
+    role: 'PARTICIPANT',
+    currentUser: true,
+  },
 ];
 
 const ManagerSelectWithState = () => {
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
-  const [isAiCardOpen] = useState(false);
 
   return (
     <ManagerItems
-      isAiCardOpen={isAiCardOpen}
       selectedValue={selectedMember}
       setSelectedValue={setSelectedMember}
       members={dummyMembers}

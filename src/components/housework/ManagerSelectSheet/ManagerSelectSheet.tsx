@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dispatch, SetStateAction } from 'react';
 import BottomSheet from '@/components/common/bottomSheet/BottomSheet';
 import ManagerItems from '@/components/housework/ManagerSelectSheet/ManagerItem/ManagerItems';
 import Button from '@/components/common/button/Button/Button';
-import AiChoice from '@/components/housework/AiChoice/AiChoice';
+// import AiChoice from '@/components/housework/AiChoice/AiChoice';
 import { User } from '@/types/apis/groupApi';
-import { RefreshIcon } from '@/components/common/icon';
+// import { RefreshIcon } from '@/components/common/icon';
 
 interface ManagerSelectSheetProps {
   /**바텀시트 오픈 여부 */
@@ -27,40 +27,37 @@ const ManagerSelectSheet: React.FC<ManagerSelectSheetProps> = ({
   setSelectedValue,
   members,
 }) => {
-  const [isAiCardOpen, setIsAiCardOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [tags, setTags] = useState<string[]>([]);
+  // const [isAiCardOpen, setIsAiCardOpen] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [tags, setTags] = useState<string[]>([]);
 
-  const handleClick = () => {
-    setIsAiCardOpen(true);
-    // todo
-    // ai 할당 api 부르기
-    setTimeout(() => {
-      setTags(['규칙적으로 청소', '나 자신을 위해', '청소 각오는 만땅!', '화장실 청소 좋아!']);
-      setIsLoading(false);
-    }, 1500);
-  };
-
-  // todo
-  // ai 선택이 완료되었다면 ai 선택 버튼 대신에 다시하기 버튼으로 교체
+  // const handleClick = () => {
+  //   setIsAiCardOpen(true);
+  //   // todo
+  //   // ai 할당 api 부르기
+  //   setTimeout(() => {
+  //     setTags(['규칙적으로 청소', '나 자신을 위해', '청소 각오는 만땅!', '화장실 청소 좋아!']);
+  //     setIsLoading(false);
+  //   }, 1500);
+  // };
 
   return (
     <BottomSheet isOpen={isOpen} setOpen={setIsOpen} title='담당자 고르기'>
       <div className='flex flex-col'>
-        {isAiCardOpen && <AiChoice isLoading={isLoading} tags={tags} />}
+        {/* {isAiCardOpen && <AiChoice isLoading={isLoading} tags={tags} />} */}
         <ManagerItems
-          isAiCardOpen={isAiCardOpen}
+          //isAiCardOpen={isAiCardOpen}
           setSelectedValue={setSelectedValue}
           selectedValue={selectedValue}
           members={members}
         />
         <div className='flex gap-3 px-5 pb-6'>
-          <Button
+          {/* <Button
             label={isAiCardOpen ? <RefreshIcon /> : 'AI 픽'}
             variant='secondary'
             size='small'
             handleClick={handleClick}
-          />
+          /> */}
           <Button label='확인' variant='full' size='small' handleClick={handleDoneClick} />
         </div>
       </div>

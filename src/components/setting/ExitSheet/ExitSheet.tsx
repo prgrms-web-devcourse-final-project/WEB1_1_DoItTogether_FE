@@ -36,12 +36,12 @@ const ExitSheet: React.FC<ExitSheetProps> = ({
 
   return (
     <BottomSheet isOpen={isOpen} setOpen={setOpen} title={sheetTitle} closeBtn={false}>
-      <div className='flex flex-row gap-4 p-5'>
+      <div className='flex flex-row gap-4 px-5 pb-6 pt-1'>
         <Button
           label={btnText}
           size='large'
           variant='full'
-          className='mb-0'
+          className='mb-0 border-none bg-sub2 text-main'
           handleClick={handleExitClick}
         />
         <Button

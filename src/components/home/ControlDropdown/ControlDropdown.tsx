@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/common/ui/dropdown-menu';
-import { DotsIcon } from '@/components/common/icon';
+import { BinIcon, DotsIcon, PencilIcon } from '@/components/common/icon';
 
 export interface ControlDropdownProps {
   id: number;
@@ -18,21 +18,25 @@ const ControlDropdown = ({ id, handleEdit, handleDelete }: ControlDropdownProps)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <DotsIcon className='text-white' />
+        <DotsIcon className='text-gray2' />
       </DropdownMenuTrigger>
       <DropdownMenuContent className='flex -translate-x-10 flex-col rounded-2xl'>
         <DropdownMenuItem
-          className='flex items-center justify-between px-5 py-2 text-14'
+          className='flex items-center justify-between px-5 py-2 font-label'
           onSelect={handleEdit}
         >
-          <span className='border-gray-300 border px-2 py-2'>{/* 아이콘 자리 */}</span>
+          <span className='border-gray-300 border'>
+            <PencilIcon />
+          </span>
           수정
         </DropdownMenuItem>
         <DropdownMenuItem
-          className='flex items-center justify-between px-5 py-2 text-14'
+          className='flex items-center justify-between px-5 py-2 font-label'
           onSelect={() => handleDelete(id)}
         >
-          <span className='border-gray-300 border px-2 py-2'>{/* 아이콘 자리 */}</span>
+          <span className='border-gray-300 border'>
+            <BinIcon />
+          </span>
           삭제
         </DropdownMenuItem>
       </DropdownMenuContent>

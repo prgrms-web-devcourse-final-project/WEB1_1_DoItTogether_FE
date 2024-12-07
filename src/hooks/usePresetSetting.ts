@@ -7,7 +7,7 @@ import {
 } from '@/services/preset';
 import usePresetSettingStore from '@/store/usePresetSettingStore';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PresetDefault, PresetTabName } from '@/constants';
+import { Category, PresetDefault, PresetTabName } from '@/constants';
 
 const usePresetSetting = () => {
   const navigate = useNavigate();
@@ -15,9 +15,11 @@ const usePresetSetting = () => {
     setCategoryList,
     setDeleteButtonStates,
     activeTab,
+    setActiveTab,
     setPresetData,
     selectedItem,
     setSelectedItem,
+    setCateActiveTab,
   } = usePresetSettingStore();
   const { channelId: strChannelId } = useParams();
   const channelId = Number(strChannelId);
@@ -38,6 +40,7 @@ const usePresetSetting = () => {
 
   useEffect(() => {
     getPresetData();
+    setCateActiveTab(Category.ALL);
   }, [activeTab]);
 
   const getPresetData = async () => {
@@ -63,6 +66,7 @@ const usePresetSetting = () => {
       });
       // 업데이트된 아이템 리스트 조회
       await getPresetData();
+      setCateActiveTab(Category.ALL);
     } catch (error) {
       console.error('프리셋 아이템 추가 오류: ', error);
     }
@@ -74,11 +78,11 @@ const usePresetSetting = () => {
     setDeleteButtonStates(isDeselecting ? null : presetItemId);
   };
 
-  const handleDeleteClick = async (presetItemId: number) => {
+  const handleDeleteClick = async (presetCategoryId: number, presetItemId: number) => {
     setDeleteButtonStates(null);
 
     try {
-      await deletePresetItem({ channelId, presetItemId });
+      await deletePresetItem({ channelId, presetCategoryId, presetItemId });
       // 업데이트된 아이템 리스트 조회
       await getPresetData();
     } catch (error) {
@@ -90,11 +94,27 @@ const usePresetSetting = () => {
     navigate(-1);
   };
 
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
+  const handleCateTabChange = (value: string) => {
+    setCateActiveTab(value);
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   return {
     handleAddInput,
     handleSelectClick,
     handleDeleteClick,
     handleBack,
+    handleTabChange,
+    handleCateTabChange,
   };
 };
 

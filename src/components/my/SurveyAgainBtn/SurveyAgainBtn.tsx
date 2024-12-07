@@ -1,15 +1,17 @@
 import Button from '@/components/common/button/Button/Button';
 import Broomstick from '@/components/common/icon/Broomstick';
+import { useNavigate } from 'react-router-dom';
 
 const SurveyAgainBtn = () => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    //survey로 이동
+    navigate('/survey-intro');
   };
+
   return (
-    <div className='relative overflow-hidden px-5'>
+    <div className='relative cursor-pointer overflow-hidden px-5' onClick={handleClick}>
       <Button
         variant='full'
-        handleClick={handleClick}
         size='large'
         className={'h-28 justify-between px-4'}
         label={'내 성향 다시 분석하기'}

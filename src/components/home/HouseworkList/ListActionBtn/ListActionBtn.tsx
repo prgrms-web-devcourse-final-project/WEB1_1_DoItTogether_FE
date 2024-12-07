@@ -18,9 +18,15 @@ const ListActionBtn: React.FC<ListActionBtnProps> = ({ status, handleAction, id 
       onClick={() => handleAction(id)}
     >
       {status === HOUSEWORK_STATUS.COMPLETE && <CheckFillIcon width={32} height={32} />}
-      {status === HOUSEWORK_STATUS.UN_COMPLETE && <CheckEmptyIcon width={32} height={32} />}
-      {status === HOUSEWORK_STATUS.FINGER && <FingerIcon width={32} height={32} />}
-      {status === HOUSEWORK_STATUS.HEART && <HeartIcon width={32} height={32} />}
+      {status === HOUSEWORK_STATUS.UN_COMPLETE && (
+        <CheckEmptyIcon width={32} height={32} className={'text-gray5'} />
+      )}
+      {status === HOUSEWORK_STATUS.FINGER && (
+        <FingerIcon width={32} height={32} fillColor={'fill-blue1'} />
+      )}
+      {status === HOUSEWORK_STATUS.HEART && (
+        <HeartIcon width={32} height={32} fillColor={'fill-pink1'} />
+      )}
     </div>
   );
 };

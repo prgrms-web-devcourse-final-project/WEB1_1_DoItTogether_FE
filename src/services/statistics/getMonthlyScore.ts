@@ -4,7 +4,7 @@ import { GetMonthlyScoreReq, GetMonthlyScoreRes } from '@/types/apis/statisticsA
 export const getMonthlyScore = async (data: GetMonthlyScoreReq) => {
   try {
     const response = await axiosInstance.get<GetMonthlyScoreRes>(
-      `/api/v1/channels/${data.channelId}/statistics/monthly/${data.targetMonth}/score`,
+      `/api/v1/channels/${data.channelId}/statistics/monthly/score`,
       {
         params: {
           targetMonth: data.targetMonth,

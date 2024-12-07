@@ -15,6 +15,7 @@ const MyPage = () => {
     socialId: '',
     profileImageUrl: '',
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMyInfo = async () => {
@@ -23,14 +24,17 @@ const MyPage = () => {
         setMyInfo(response.result);
       } catch (error) {
         console.error('내 정보 조회 실패:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchMyInfo();
   }, []);
 
-  console.log(myInfo);
-
+  if (isLoading) {
+    return <></>;
+  }
   return (
     <div>
       <Header title='마이페이지' isNeededDoneBtn={false} isNeededSettingBtn={true} />
@@ -39,7 +43,7 @@ const MyPage = () => {
       </div>
       <div className='flex justify-between px-5 pb-3 pt-2'>
         <AccountInfo nickname={myInfo.nickName} account={myInfo.email} />
-        <ProfileEditBtn />
+        <ProfileEditBtn nickname={myInfo.nickName} imageUrl={myInfo.profileImageUrl} />
       </div>
       <div className='px-5'>
         <div className='mb-6 mt-2 h-[1px] w-full bg-gray5' />

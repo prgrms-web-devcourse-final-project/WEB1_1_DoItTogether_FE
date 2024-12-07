@@ -1,6 +1,7 @@
 import Button from '@/components/common/button/Button/Button';
 import InputBox from '@/components/common/input/InputBox';
-import React from 'react';
+import { INPUT_VALIDATION } from '@/constants/validation';
+import React, { useState } from 'react';
 
 interface GroupCreateStep1Props {
   handleNext: () => void;
@@ -13,6 +14,20 @@ const GroupCreateStep1: React.FC<GroupCreateStep1Props> = ({
   roomName,
   setRoomName,
 }) => {
+  const [error, setError] = useState<boolean>(false);
+
+  const handleRoomNameChange = (value: string) => {
+    setRoomName(value);
+    if (
+      value.length <= INPUT_VALIDATION.roomName.maxLength &&
+      INPUT_VALIDATION.roomName.regexp.test(value)
+    ) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
   return (
     <div className='flex h-full flex-col justify-between p-5'>
       <div>
@@ -20,8 +35,11 @@ const GroupCreateStep1: React.FC<GroupCreateStep1Props> = ({
           placeholder='방 이름을 입력해주세요'
           disabled={false}
           value={roomName}
-          handleChange={setRoomName}
+          handleChange={handleRoomNameChange}
         />
+        {error && (
+          <p className='mt-1 text-main font-caption'>{INPUT_VALIDATION.roomName.errorMessage}</p>
+        )}
       </div>
       <div>
         <Button
@@ -30,7 +48,7 @@ const GroupCreateStep1: React.FC<GroupCreateStep1Props> = ({
           variant='full'
           className='mb-0'
           handleClick={handleNext}
-          disabled={!roomName.trim()}
+          disabled={!roomName.trim() || error}
         />
       </div>
     </div>

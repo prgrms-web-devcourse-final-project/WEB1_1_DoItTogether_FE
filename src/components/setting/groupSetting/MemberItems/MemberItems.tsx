@@ -11,8 +11,8 @@ interface MemberItemsProps {
 
 const MemberItems: React.FC<MemberItemsProps> = ({ leader, members, currentUser, handleClick }) => {
   return (
-    <div className='flex flex-col gap-2'>
-      <p className='text-black font-label'>그룹원 관리</p>
+    <div className='flex flex-col'>
+      <p className='pb-2 text-black font-label'>그룹원 관리</p>
       <div className='flex flex-col'>
         {members.map(member => (
           <MemberItem

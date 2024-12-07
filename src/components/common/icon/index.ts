@@ -36,3 +36,4 @@ export { default as TrashCanIcon } from './TrashCanIcon';
 export { default as BroomDustIcon } from './BroomDustIcon';
 export { default as BubbleIcon } from './BubbleIcon';
 export { default as ShinyIcon } from './ShinyIcon';
+export { default as ProfileDefaultIcon } from './ProfileDefaultIcon';

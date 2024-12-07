@@ -19,6 +19,7 @@ export const Default: Story = {
     date: '1',
     day: '월',
     pendingCnt: 1,
+    solvedMatters: true,
     isActive: true,
     handleClick: action('DateItem clicked'),
   },

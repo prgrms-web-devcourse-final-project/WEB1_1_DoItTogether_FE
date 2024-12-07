@@ -43,3 +43,6 @@ export interface GetMyInitStateRes extends BaseRes {
 
 /** 나의 초기 설정 상태 수정 res */
 export interface PatchMyInitStateRes extends BaseRes {}
+
+/** 회원 탈퇴 res */
+export interface DeleteMyInfoRes extends BaseRes {}

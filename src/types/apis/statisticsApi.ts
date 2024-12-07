@@ -25,10 +25,12 @@ export interface GetWeeklyTotalCountReq extends Pick<Common, 'channelId'> {
 }
 export interface GetWeeklyTotalCountRes extends BaseRes {
   result: {
+    /** 그룹명*/
+    channelName: string;
     /** 완료 개수 */
     completeCount: number;
     /** 미완료 개수 */
-    notCompleteCount: number;
+    unCompletedCount: number;
     /** 칭찬 개수 */
     complimentCount: number;
     /** 찌르기 개수 */
@@ -69,9 +71,17 @@ export interface GetMonthlyMVPReq extends Pick<Common, 'channelId'> {
 }
 export interface GetMonthlyMVPRes extends BaseRes {
   result: {
+    /** 칭찬 MVP user ID */
+    complimentMVPUserId: string;
     /** 칭찬 MVP */
     complimentMVPNickName: string;
+    /** 칭찬 MVP count */
+    complimentMVPCount: string;
+    /** 찌르기 MVP user ID */
+    pokeMVPUserId: string;
     /** 찌르기 MVP */
     pokeMVPNickName: string;
+    /** 찌르기 MVP count*/
+    pokeMVPCount: string;
   };
 }

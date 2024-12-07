@@ -2,6 +2,12 @@ import { create } from 'zustand';
 import { Group } from '@/types/apis/groupApi';
 import getFormattedDate from '@/utils/getFormattedDate';
 import { UserBase } from '@/types/apis/userApi';
+import { IncompleteScoreResponse } from '@/types/apis/houseworkApi';
+import getWeekText from '@/utils/getWeekText';
+
+interface WeeklyDates extends IncompleteScoreResponse {
+  day: string;
+}
 
 interface HomePageState {
   currentGroup: Group;
@@ -19,6 +25,9 @@ interface HomePageState {
   activeDate: string;
   setActiveDate: (newDate: string) => void;
 
+  activeWeek: Date;
+  setActiveWeek: (date: Date) => void;
+
   homePageNumber: number;
   setHomePageNumber: (newPage: number) => void;
 
@@ -27,6 +36,9 @@ interface HomePageState {
 
   myInfo: UserBase | null;
   setMyInfo: (newMyInfo: UserBase) => void;
+
+  currWeek: WeeklyDates[];
+  setCurrWeek: (newWeek: WeeklyDates[]) => void;
 }
 
 const useHomePageStore = create<HomePageState>(set => ({
@@ -39,7 +51,10 @@ const useHomePageStore = create<HomePageState>(set => ({
   groups: [{ channelId: 0, name: '기본 그룹명' }],
   setGroups: groups => set({ groups: groups }),
 
-  weekText: '',
+  activeWeek: new Date(),
+  setActiveWeek: date => set({ activeWeek: date }),
+
+  weekText: getWeekText(new Date()),
   setWeekText: weekText => set({ weekText: weekText }),
 
   activeDate: getFormattedDate(new Date()),
@@ -53,6 +68,9 @@ const useHomePageStore = create<HomePageState>(set => ({
 
   myInfo: null,
   setMyInfo: newMyInfo => set({ myInfo: newMyInfo }),
+
+  currWeek: [],
+  setCurrWeek: newWeek => set({ currWeek: newWeek }),
 }));
 
 export default useHomePageStore;

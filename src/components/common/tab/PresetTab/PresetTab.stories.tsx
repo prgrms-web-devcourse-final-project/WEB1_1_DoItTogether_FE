@@ -1,7 +1,7 @@
 // PresetTab.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import PresetTab from '@/components/common/tab/PresetTab/PresetTab';
-import { Category } from '@/constants/Category';
+import { Category } from '@/constants';
 
 interface PresetItem {
   presetItemId: number;

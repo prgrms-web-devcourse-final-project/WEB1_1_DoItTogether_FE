@@ -107,6 +107,8 @@ export interface CreatePresetItemRes extends BaseRes {
 
 /** 프리셋 아이템 삭제 */
 export interface DeletePresetItemReq extends Pick<Common, 'channelId'> {
+  /** 프리셋 카테고리 아이디 */
+  presetCategoryId: number;
   /** 프리셋 아이템 아이디 */
   presetItemId: number;
 }

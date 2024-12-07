@@ -14,6 +14,7 @@ import { toast } from '@/hooks/use-toast';
 import { useParams } from 'react-router-dom';
 import { ArrowRightIcon } from '@/components/common/icon';
 import { Button } from '@/components/common/ui/button';
+import { INPUT_VALIDATION } from '@/constants/validation';
 
 const GroupSettingPage = () => {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ const GroupSettingPage = () => {
 
   const [selectedMember, setSelectedMember] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [error, setError] = useState<boolean>(false);
 
   const channelId = Number(strChannelId);
 
@@ -60,6 +63,14 @@ const GroupSettingPage = () => {
   const handleGroupNameChange = (value: string) => {
     setGroupName(value);
     setIsEdited(value !== groupName);
+    if (
+      value.length <= INPUT_VALIDATION.roomName.maxLength &&
+      INPUT_VALIDATION.roomName.regexp.test(value)
+    ) {
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   const handleDone = async () => {
@@ -82,13 +93,13 @@ const GroupSettingPage = () => {
     const isCurrentUserSelected = member.currentUser;
     if (isAdmin && isCurrentUserSelected) {
       setBtnText('나갈래요');
-      setSheetTitle(`${groupName}에서 정말 나가시나요?`);
+      setSheetTitle(`${groupName}에서 정말 나가시겠습니까?`);
     } else if (isAdmin) {
       setBtnText('내보낼래요');
-      setSheetTitle(`${member.nickName}님을 정말 내보내시나요?`);
+      setSheetTitle(`${member.nickName}님을 내보내시겠습니까?`);
     } else {
       setBtnText('나갈래요');
-      setSheetTitle(`${groupName}에서 정말 나가시나요?`);
+      setSheetTitle(`${groupName}에서 정말 나가시겠습니까?`);
     }
     setIsOpen(true);
   };
@@ -101,6 +112,7 @@ const GroupSettingPage = () => {
       if (isAdmin && !isCurrentUserSelected) {
         await postBanUser({ channelId, email: member.email });
         setMembers(prev => prev.filter(m => m.email !== member.email));
+        toast({ title: '탈퇴되었습니다' });
       } else {
         await deleteGroupUser({ channelId });
         navigate('/group-select');
@@ -118,7 +130,7 @@ const GroupSettingPage = () => {
   };
 
   if (isLoading) {
-    return <div>로딩 컴포넌트 나중에 넣자</div>;
+    return <div></div>;
   }
 
   return (
@@ -126,17 +138,22 @@ const GroupSettingPage = () => {
       <div className='fixed left-0 right-0 top-0 z-10 m-auto max-w bg-white'>
         <SettingHeaderContainer
           title='그룹 설정'
-          isNeededDoneBtn={isEdited}
+          isNeededDoneBtn={isEdited && !error}
           handleDone={handleDone}
         />
       </div>
-      <div className='flex flex-col gap-6 px-5 pt-20'>
-        <InputWithLabel
-          label='공간 이름'
-          value={groupName}
-          disabled={!isAdmin}
-          handleChange={handleGroupNameChange}
-        />
+      <div className='flex flex-col gap-8 px-5 pt-20'>
+        <div className='flex flex-col gap-1'>
+          <InputWithLabel
+            label='공간 이름'
+            value={groupName}
+            disabled={!isAdmin}
+            handleChange={handleGroupNameChange}
+          />
+          {error && (
+            <p className='text-main font-caption'>{INPUT_VALIDATION.roomName.errorMessage}</p>
+          )}
+        </div>
         <MemberItems
           leader={isAdmin}
           members={members}

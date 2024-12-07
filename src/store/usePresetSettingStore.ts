@@ -25,6 +25,9 @@ interface PresetState {
   // 활성화 탭 (사용자정의 | 프리셋)
   activeTab: string;
   setActiveTab: (activeTab: string | ((prevState: string) => string)) => void;
+  // 카테고리 활성화 탭
+  cateActiveTab: string;
+  setCateActiveTab: (cateActiveTab: string) => void;
   // input 값
   inputVal: string;
   setInputVal: (inputVal: string) => void;
@@ -54,6 +57,8 @@ const usePresetSettingStore = create<PresetState>(set => ({
     set(state => ({
       activeTab: typeof activeTab === 'function' ? activeTab(state.activeTab) : activeTab,
     })),
+  cateActiveTab: Category.ALL,
+  setCateActiveTab: cateActiveTab => set({ cateActiveTab }),
   inputVal: '',
   setInputVal: inputVal => set({ inputVal }),
   activeInputCate: '',

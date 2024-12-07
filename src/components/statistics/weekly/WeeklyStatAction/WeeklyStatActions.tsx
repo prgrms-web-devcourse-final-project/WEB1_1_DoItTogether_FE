@@ -1,16 +1,15 @@
 import React from 'react';
 import WeeklyStatAction from '@/components/statistics/weekly/WeeklyStatAction/WeeklyStatAction';
+import { WeeklyTotalCount } from '@/store/useWeeklyStatisticsStore';
 
-interface WeeklyStatActionsProps {
-  numOfCompliment: number;
-  numOfTease: number;
-}
-
-const WeeklyStatActions: React.FC<WeeklyStatActionsProps> = ({ numOfCompliment, numOfTease }) => {
+const WeeklyStatActions: React.FC<Pick<WeeklyTotalCount, 'complimentCount' | 'pokeCount'>> = ({
+  complimentCount,
+  pokeCount,
+}) => {
   return (
     <div className='mb-4 flex justify-between gap-3'>
-      <WeeklyStatAction type='compliment' num={numOfCompliment} />
-      <WeeklyStatAction type='tease' num={numOfTease} />
+      <WeeklyStatAction type='compliment' num={complimentCount} />
+      <WeeklyStatAction type='tease' num={pokeCount} />
     </div>
   );
 };

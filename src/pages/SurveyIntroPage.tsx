@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import Button from '@/components/common/button/Button/Button';
 import SurveyTitle from '@/components/survey/SurveyTitle/SurveyTitle';
 import SurveyIntroDesc from '@/components/survey/surveyIntro/SurveyIntroDesc';
-import SurveyIntroIcon from '@/components/survey/surveyIntro/SurveyIntroIcon';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LottieIcon from '@/components/common/lottie/LottieIcon';
 
 const SurveyIntroPage: React.FC = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const SurveyIntroPage: React.FC = () => {
 
   return (
     <motion.div
-      className='flex h-screen flex-col justify-between px-5 pb-6 pt-10'
+      className={`flex h-screen flex-col justify-between px-5 pb-6 pt-10`}
       variants={container}
       initial='hidden'
       animate='show'
@@ -46,8 +46,8 @@ const SurveyIntroPage: React.FC = () => {
           <SurveyIntroDesc />
         </motion.div>
       </div>
-      <motion.div variants={item}>
-        <SurveyIntroIcon />
+      <motion.div variants={item} className='h-96'>
+        <LottieIcon />
       </motion.div>
       <motion.div variants={item}>
         <Button

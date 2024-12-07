@@ -11,9 +11,12 @@ import { useParams } from 'react-router-dom';
 import { getGroupUser } from '@/services/group/getGroupUser';
 import { User } from '@/types/apis/groupApi';
 import { postHousework } from '@/services/housework/postHousework';
-import { SelectedTime } from '@/pages/HouseWorkStepOnePage';
 import { ProfileIcon } from '@/components/common/icon';
 import { putHousework } from '@/services/housework/putHousework';
+import { formatDateToISO } from '@/utils/convertDate';
+import { convertStartTime } from '@/utils/convertStartTime';
+import useHomePageStore from '@/store/useHomePageStore';
+import getWeekText from '@/utils/getWeekText';
 
 const HouseWorkStepTwoPage = () => {
   const navigate = useNavigate();
@@ -23,6 +26,8 @@ const HouseWorkStepTwoPage = () => {
   const { task, category, startDate, startTime, userId, setUserId, reset } = useAddHouseWorkStore();
   const [selectedValue, setSelectedValue] = useState(userId || null);
   const [members, setMembers] = useState<User[]>([]);
+  const [isMemberLoading, setIsMemberLoading] = useState(true);
+  const { setActiveDate, setActiveWeek, setActiveTab, setWeekText } = useHomePageStore();
 
   const channelId = Number(strChannelId);
 
@@ -33,13 +38,17 @@ const HouseWorkStepTwoPage = () => {
         setMembers(response.result.userList);
       } catch (error) {
         console.error('멤버 조회 실패:', error);
+      } finally {
+        setIsMemberLoading(false);
       }
     };
 
     fetchGroupMembers();
   }, []);
 
-  console.log('전역:', task, category, startDate, startTime, userId);
+  if (isMemberLoading) {
+    return <></>;
+  }
 
   const handleBackClick = () => {
     if (houseworkId) navigate(`/add-housework/edit/${channelId}/${houseworkId}/step1`);
@@ -49,28 +58,7 @@ const HouseWorkStepTwoPage = () => {
   const handleNextClick = async () => {
     setIsLoading(true);
 
-    const formattedDate = startDate.replace(
-      /(\d{4})년(\d{1,2})월 (\d{1,2})일/,
-      (_, year, month, day) => {
-        const formattedMonth = month.padStart(2, '0');
-        const formattedDay = day.padStart(2, '0');
-        return `${year}-${formattedMonth}-${formattedDay}`;
-      }
-    );
-
-    const convertStartTime = (time: SelectedTime | null) => {
-      if (!time) return null;
-
-      let hour = parseInt(time.hour);
-      if (time.ampm === 'PM' && hour !== 12) {
-        hour += 12;
-      } else if (time.ampm === 'AM' && hour === 12) {
-        hour = 0;
-      }
-
-      return `${hour.toString().padStart(2, '0')}:${time.minute}`;
-    };
-
+    const formattedDate = formatDateToISO(startDate);
     const newTime = convertStartTime(startTime);
 
     if (houseworkId) {
@@ -86,12 +74,16 @@ const HouseWorkStepTwoPage = () => {
         });
 
         setTimeout(() => {
+          setActiveDate(formattedDate);
+          setActiveWeek(new Date(formattedDate));
+          setActiveTab('전체');
+          setWeekText(getWeekText(new Date(formattedDate)));
           navigate(`/main/${channelId}`);
           setTimeout(() => {
             reset();
             setIsLoading(false);
-          }, 1500);
-        }, 1500);
+          }, 2000);
+        }, 2500);
       }
     } else {
       try {
@@ -106,12 +98,16 @@ const HouseWorkStepTwoPage = () => {
           });
 
           setTimeout(() => {
+            setActiveDate(formattedDate);
+            setActiveWeek(new Date(formattedDate));
+            setActiveTab('전체');
+            setWeekText(getWeekText(new Date(formattedDate)));
             navigate(`/main/${channelId}`);
             setTimeout(() => {
               reset();
               setIsLoading(false);
-            }, 1500);
-          }, 1500);
+            }, 2000);
+          }, 2500);
         }
       } catch (error) {
         console.error('집안일 추가 실패:', error);
@@ -130,7 +126,7 @@ const HouseWorkStepTwoPage = () => {
 
   return (
     <>
-      <div className='flex h-screen flex-col gap-6 px-5 pb-6'>
+      <div className={`flex h-screen flex-col gap-6 px-5 pb-6`}>
         {isLoading ? (
           <>
             <HouseWorkAddLoading

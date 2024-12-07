@@ -1,4 +1,4 @@
-import SurveyIntroIcon from '@/components/survey/surveyIntro/SurveyIntroIcon';
+import LottieIcon from '@/components/common/lottie/LottieIcon';
 import SurveyTitle from '@/components/survey/SurveyTitle/SurveyTitle';
 import { motion } from 'framer-motion';
 
@@ -15,7 +15,7 @@ const LoadingScreen = ({ username, isCompleted }: LoadingScreenProps) => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.7, // 각 요소 사이의 딜레이
+        staggerChildren: 0.7,
       },
     },
   };
@@ -26,33 +26,35 @@ const LoadingScreen = ({ username, isCompleted }: LoadingScreenProps) => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5, // 0.3초 동안 애니메이션 실행
-        ease: 'easeIn', // 가속도 곡선 설정
+        duration: 0.5,
+        ease: 'easeIn',
       },
     },
   };
 
   return (
     <motion.div
-      className='flex h-full flex-col gap-20 px-5 text-center'
+      className='flex h-full flex-col px-5 text-center'
       variants={container}
       initial='hidden'
       animate='show'
     >
-      <motion.div variants={item}>
+      <motion.div variants={item} className='mt-[88px]'>
         <SurveyTitle
           title={
             <div className='text-center'>
               {isCompleted
                 ? `${username}님의\n청소성향 분석이 완료되었어요`
-                : 'gpi 4.o가\n당신의 청소성향을 분석하고 있어요'}
+                : 'Open AI GPT가\n당신의 청소성향을 분석하고 있어요'}
             </div>
           }
         />
       </motion.div>
-      <motion.div variants={item}>
-        <SurveyIntroIcon />
-      </motion.div>
+      <div className='flex flex-1 items-center justify-center'>
+        <motion.div variants={item} className='h-96 w-full'>
+          <LottieIcon />
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

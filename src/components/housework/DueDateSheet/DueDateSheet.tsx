@@ -21,7 +21,10 @@ const DueDateSheet = ({ isOpen, setOpen }: DueDateSheetProps) => {
           month: 'long',
           day: 'numeric',
         })
-        .replace(' ', '');
+        .split(' ')
+        .join('')
+        .replace('년', '년 ')
+        .replace('월', '월 ');
       setStartDate(formattedDate);
     } else {
       setStartDate('');

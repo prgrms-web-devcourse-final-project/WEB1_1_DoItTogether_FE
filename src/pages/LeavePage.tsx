@@ -4,6 +4,8 @@ import { Checkbox } from '@/components/common/ui/checkbox';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import LogoIcon from '@/components/common/icon/LogoIcon';
+import { deleteUser } from '@/services/user/deleteUser';
 
 const LeavePage = () => {
   const navigate = useNavigate();
@@ -18,15 +20,23 @@ const LeavePage = () => {
     setIsChecked(!isChecked);
   };
 
-  const handleDone = () => {
-    console.log('가지마 ㅜㅜㅜㅜ 😈');
+  const handleDone = async () => {
+    try {
+      await deleteUser();
+      localStorage.removeItem('access_token');
+      navigate('/');
+    } catch (error) {
+      console.error('회원 탈퇴 실패:', error);
+    }
   };
 
   return (
-    <div className='flex h-screen flex-col gap-6'>
+    <div className={`flex h-screen flex-col gap-6`}>
       <Header title='탈퇴하기' handleBack={handleBack} isNeededDoneBtn={false} />
       <div className='flex flex-1 flex-col gap-4 px-5'>
-        <div className='flex h-24 w-full items-center justify-center'>우리의 로고</div>
+        <div className='flex h-24 w-full items-center justify-center'>
+          <LogoIcon width={125} height={40} />
+        </div>
         <div className='flex flex-col items-center justify-center gap-6'>
           <p className='font-body'>두잇투게더 탈퇴 전 꼭 확인하세요</p>
           <div className='flex flex-col items-center justify-center text-gray3 font-caption'>

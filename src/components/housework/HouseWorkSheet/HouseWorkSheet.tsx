@@ -4,7 +4,7 @@ import Button from '@/components/common/button/Button/Button';
 import PresetTab from '@/components/common/tab/PresetTab/PresetTab';
 import Tab from '@/components/common/tab/Tab/Tab';
 import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
-import { PresetDefault, PresetTabName } from '@/constants';
+import { Category, PresetDefault, PresetTabName } from '@/constants';
 import { convertTabNameToChargers } from '@/utils/convertUtils';
 import { getAllCategoryList } from '@/services/preset';
 import { useParams } from 'react-router-dom';
@@ -34,6 +34,7 @@ interface PresetList {
 const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
   const { setTask, setCategory, selectedItem, setSelectedItem } = useAddHouseWorkStore();
   const [activeTab, setActiveTab] = useState<string>(PresetTabName.PRESET_DATA);
+  const [cateActiveTab, setCateActiveTab] = useState<string>(Category.ALL);
   const [presetData, setPresetData] = useState<PresetList[]>([]);
   const [selectedHouseWork, setSelectedHouseWork] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -57,6 +58,7 @@ const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
       }
     };
     getPresetData();
+    setCateActiveTab(Category.ALL);
   }, [activeTab]);
 
   const handleClick = (id: number, description: string, category: string) => {
@@ -78,6 +80,20 @@ const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
     setOpen(false);
   };
 
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
+  const handleCateTabChange = (value: string) => {
+    setCateActiveTab(value);
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   return (
     <BottomSheet isOpen={isOpen} setOpen={setOpen} title='집안일 선택'>
       <div className='flex min-h-96 flex-col gap-y-6 pb-6'>
@@ -85,12 +101,15 @@ const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
           <div>
             <Tab
               activeTab={activeTab}
-              handleSetActiveTab={setActiveTab}
+              // handleSetActiveTab={setActiveTab}
+              handleSetActiveTab={handleTabChange}
               chargers={convertTabNameToChargers(PresetTabName)}
             />
           </div>
           <PresetTab
             presetData={presetData}
+            cateActiveTab={cateActiveTab}
+            setCateActiveTab={handleCateTabChange}
             isBottomSheet={true}
             handleClick={handleClick}
             selectedItem={selectedItem}

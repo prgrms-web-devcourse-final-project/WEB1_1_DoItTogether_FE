@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className='flex-1 text-center text-black font-subhead'>{title}</div>
       <div className='flex flex-1 justify-end'>
         {isNeededDoneBtn ? (
-          <button className='text-gray' onClick={handleDone}>
+          <button className='text-gray2 font-label' onClick={handleDone}>
             완료
           </button>
         ) : (

@@ -1,33 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import MonthlyGrass from './MonthlyGrass';
-
-enum CompletionStatus {
-  ALL_DONE = 'ALL_DONE',
-  INCOMPLETE_REMAINING = 'INCOMPLETE_REMAINING',
-  NO_HOUSEWORK = 'NO_HOUSEWORK',
-}
-
-interface DailyTask {
-  date: string;
-  totalTasks: number;
-  completedTasks: number;
-  status: CompletionStatus;
-}
+import { CompletionStatus, MonthlyDateScore } from '@/types/apis/statisticsApi';
 
 const meta = {
-  title: 'components/statistics/monthly/MonthlyGrass',
+  title: 'Components/Statistics/Monthly/MonthlyGrass',
   component: MonthlyGrass,
+  parameters: {
+    layout: 'centered',
+    reactRouter: {
+      routePath: '/channel/:channelId/statistics',
+      routeParams: { channelId: '1' },
+    },
+  },
   tags: ['autodocs'],
   argTypes: {
-    completionData: { control: 'object' },
-    onMonthChange: { action: 'monthChanged' },
+    onMonthChange: {
+      action: 'monthChanged',
+      description: '월이 변경될 때 호출되는 함수',
+    },
+    onDataChange: {
+      action: 'dataChanged',
+      description: '데이터가 변경될 때 호출되는 함수',
+    },
   },
 } satisfies Meta<typeof MonthlyGrass>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const sampleCompletionData: DailyTask[] = [
+const sampleData: MonthlyDateScore[] = [
   { date: '2024-11-01', totalTasks: 3, completedTasks: 3, status: CompletionStatus.ALL_DONE },
   { date: '2024-11-02', totalTasks: 3, completedTasks: 3, status: CompletionStatus.ALL_DONE },
   { date: '2024-11-03', totalTasks: 3, completedTasks: 3, status: CompletionStatus.ALL_DONE },
@@ -45,53 +46,37 @@ const sampleCompletionData: DailyTask[] = [
     status: CompletionStatus.INCOMPLETE_REMAINING,
   },
   { date: '2024-11-07', totalTasks: 0, completedTasks: 0, status: CompletionStatus.NO_HOUSEWORK },
-  // ... 더 많은 날짜 데이터를 추가할 수 있습니다.
 ];
 
 export const Default: Story = {
   args: {
-    completionData: sampleCompletionData,
     onMonthChange: (monthKey: string) => console.log('Month changed:', monthKey),
+    onDataChange: (data: MonthlyDateScore[]) => console.log('Data changed:', data),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '기본 캘린더 뷰입니다.',
+      },
+    },
   },
 };
 
-export const EmptyCalendar: Story = {
+export const WithMockData: Story = {
   args: {
-    completionData: [],
     onMonthChange: (monthKey: string) => console.log('Month changed:', monthKey),
+    onDataChange: (data: MonthlyDateScore[]) => console.log('Data changed:', data),
   },
-};
-
-export const AllDone: Story = {
-  args: {
-    completionData: sampleCompletionData.map(data => ({
-      ...data,
-      status: CompletionStatus.ALL_DONE,
-      completedTasks: data.totalTasks,
-    })),
-    onMonthChange: (monthKey: string) => console.log('Month changed:', monthKey),
-  },
-};
-
-export const AllIncomplete: Story = {
-  args: {
-    completionData: sampleCompletionData.map(data => ({
-      ...data,
-      status: CompletionStatus.INCOMPLETE_REMAINING,
-      completedTasks: Math.max(0, data.totalTasks - 1),
-    })),
-    onMonthChange: (monthKey: string) => console.log('Month changed:', monthKey),
-  },
-};
-
-export const AllNoHousework: Story = {
-  args: {
-    completionData: sampleCompletionData.map(data => ({
-      ...data,
-      status: CompletionStatus.NO_HOUSEWORK,
-      totalTasks: 0,
-      completedTasks: 0,
-    })),
-    onMonthChange: (monthKey: string) => console.log('Month changed:', monthKey),
+  parameters: {
+    docs: {
+      description: {
+        story: '목업 데이터가 있는 캘린더 뷰입니다.',
+      },
+    },
+    mockData: {
+      result: {
+        monthlyStatistics: sampleData,
+      },
+    },
   },
 };

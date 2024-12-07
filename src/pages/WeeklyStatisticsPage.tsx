@@ -5,12 +5,10 @@ import WeeklyStatActions from '@/components/statistics/weekly/WeeklyStatAction/W
 import WeeklyRanking from '@/components/statistics/weekly/WeeklyRanking/WeeklyRanking';
 import useWeeklyStateStore from '@/store/useWeeklyStatisticsStore';
 import useWeeklyStatistics from '@/hooks/useWeeklyStatistics';
-import useHomePageStore from '@/store/useHomePageStore';
 
 const WeeklyStatisticsPage: React.FC = () => {
   const { currentDate, totalCountData, scoreCountData } = useWeeklyStateStore();
   const { handlePrevWeek, handleNextWeek } = useWeeklyStatistics();
-  const { currentGroup } = useHomePageStore();
 
   return (
     <>
@@ -20,13 +18,13 @@ const WeeklyStatisticsPage: React.FC = () => {
         handleNextWeek={handleNextWeek}
       />
       <WeeklyCompletion
-        groupName={currentGroup.name}
-        completed={totalCountData.completeCount}
-        notCompleted={totalCountData.notCompleteCount}
+        channelName={totalCountData.channelName}
+        completeCount={totalCountData.completeCount}
+        unCompletedCount={totalCountData.unCompletedCount}
       />
       <WeeklyStatActions
-        numOfCompliment={totalCountData.complimentCount}
-        numOfTease={totalCountData.pokeCount}
+        complimentCount={totalCountData.complimentCount}
+        pokeCount={totalCountData.pokeCount}
       />
       <WeeklyRanking rankings={scoreCountData} />
     </>

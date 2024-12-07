@@ -13,19 +13,23 @@ type Story = StoryObj<typeof meta>;
 
 export const DUMMY_RANKING = [
   {
-    nickname: '엄마',
+    nickName: '엄마',
+    profileImageUrl: '',
     completeCount: 8,
   },
   {
-    nickname: '아빠',
+    nickName: '아빠',
+    profileImageUrl: '',
     completeCount: 6,
   },
   {
-    nickname: '첫째',
+    nickName: '첫째',
+    profileImageUrl: '',
     completeCount: 4,
   },
   {
-    nickname: '둘째',
+    nickName: '둘째',
+    profileImageUrl: '',
     completeCount: 2,
   },
 ];

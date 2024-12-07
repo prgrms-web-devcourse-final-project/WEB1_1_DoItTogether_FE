@@ -4,7 +4,7 @@ import { GetWeeklyScoreReq, GetWeeklyScoreRes } from '@/types/apis/statisticsApi
 export const getWeeklyScore = async ({ channelId, targetDate }: GetWeeklyScoreReq) => {
   try {
     const response = await axiosInstance.get<GetWeeklyScoreRes>(
-      `/api/v1/channels/${channelId}/statistics/weekly/${targetDate}/score`,
+      `/api/v1/channels/${channelId}/statistics/weekly/score`,
       { params: { targetDate } }
     );
     return response.data;
