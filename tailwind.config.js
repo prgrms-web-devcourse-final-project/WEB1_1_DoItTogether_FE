@@ -90,6 +90,7 @@ export default {
       gray6: '#B5B4B4',
 
       kakao: '#FEE500',
+      naver: '#03CD5C',
       rank1: '#FFDD00',
       rank2: '#E7E6E6',
       rank3: '#FF9D00',
