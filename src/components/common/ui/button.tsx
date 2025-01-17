@@ -18,6 +18,8 @@ const buttonVariants = cva(
           'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground text-black',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         kakao: 'bg-kakao font-body',
+        naver: 'bg-naver font-body',
+        google: 'border-black border-solid border',
         group: 'border-b-[1px] border-solid border-gray4 border-opacity-30 bg-white !rounded-none',
         onboarding: 'rounded-2xl border-solid border-[1px] px-3 border-gray4 font-body text-gray3',
       },

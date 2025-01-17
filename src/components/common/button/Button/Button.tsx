@@ -5,7 +5,16 @@ interface ButtonProps {
   /** 라벨 */
   label: React.ReactNode;
   /** 타입 */
-  variant: 'full' | 'select' | 'secondary' | 'disabled' | 'kakao' | 'group' | 'onboarding';
+  variant:
+    | 'full'
+    | 'select'
+    | 'secondary'
+    | 'disabled'
+    | 'kakao'
+    | 'naver'
+    | 'google'
+    | 'group'
+    | 'onboarding';
   /** 사이즈 */
   size: 'small' | 'large';
   /** 클릭 이벤트 */
