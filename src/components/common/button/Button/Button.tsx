@@ -22,6 +22,7 @@ interface ButtonProps {
   /** 커스텀 스타일 */
   className?: string;
   disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 const Button = ({
@@ -31,6 +32,7 @@ const Button = ({
   handleClick,
   className,
   disabled = false,
+  icon,
 }: ButtonProps) => {
   return (
     <ButtonComponent
@@ -40,7 +42,14 @@ const Button = ({
       className={className}
       disabled={disabled}
     >
-      {label}
+      {icon ? (
+        <div className='flex w-full items-center'>
+          <span className='ml-5'>{icon}</span>
+          <span className='flex-1 text-center'>{label}</span>
+        </div>
+      ) : (
+        label
+      )}
     </ButtonComponent>
   );
 };
