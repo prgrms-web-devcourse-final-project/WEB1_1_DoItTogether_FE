@@ -91,6 +91,7 @@ export default {
 
       kakao: '#FEE500',
       naver: '#03CD5C',
+      login_black: '#191919',
       rank1: '#FFDD00',
       rank2: '#E7E6E6',
       rank3: '#FF9D00',
@@ -174,6 +175,12 @@ export default {
           'letter-spacing': '1%',
           'font-weight': 500,
           'font-family': 'Pretendard Variable',
+        },
+        '.font-roboto': {
+          'font-size': '1rem',
+          'font-family': 'Roboto',
+          'line-height': '1.5',
+          'font-weight': 600,
         },
       };
       addUtilities(newUtilities);
