@@ -17,9 +17,9 @@ const buttonVariants = cva(
         outline:
           'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground text-black',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        kakao: 'bg-kakao font-roboto text-login_black',
-        naver: 'bg-naver font-roboto text-white',
-        google: 'border-black/30 border-solid border text-login_black font-roboto',
+        kakao: 'bg-kakao font-noto text-login_black',
+        naver: 'bg-naver font-noto text-white',
+        google: 'border-black/30 border-solid border text-login_black font-noto',
         group: 'border-b-[1px] border-solid border-gray4 border-opacity-30 bg-white !rounded-none',
         onboarding: 'rounded-2xl border-solid border-[1px] px-3 border-gray4 font-body text-gray3',
       },

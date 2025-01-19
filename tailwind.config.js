@@ -176,11 +176,10 @@ export default {
           'font-weight': 500,
           'font-family': 'Pretendard Variable',
         },
-        '.font-roboto': {
+        '.font-noto': {
           'font-size': '1rem',
-          'font-family': 'Roboto',
+          'font-family': 'Noto Sans KR',
           'line-height': '1.5',
-          'font-weight': 600,
         },
       };
       addUtilities(newUtilities);
