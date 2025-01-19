@@ -43,7 +43,7 @@ const LandingPage = () => {
           <LoginButton
             provider='kakao'
             handleLoginButton={() => handleLogin('kakao')}
-            label='카카오로 3초만에 시작하기'
+            label='카카오로 3초 만에 시작하기'
           />
           <LoginButton
             provider='naver'
