@@ -5,7 +5,16 @@ interface ButtonProps {
   /** 라벨 */
   label: React.ReactNode;
   /** 타입 */
-  variant: 'full' | 'select' | 'secondary' | 'disabled' | 'kakao' | 'group' | 'onboarding';
+  variant:
+    | 'full'
+    | 'select'
+    | 'secondary'
+    | 'disabled'
+    | 'kakao'
+    | 'naver'
+    | 'google'
+    | 'group'
+    | 'onboarding';
   /** 사이즈 */
   size: 'small' | 'large';
   /** 클릭 이벤트 */
@@ -13,6 +22,7 @@ interface ButtonProps {
   /** 커스텀 스타일 */
   className?: string;
   disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 const Button = ({
@@ -22,6 +32,7 @@ const Button = ({
   handleClick,
   className,
   disabled = false,
+  icon,
 }: ButtonProps) => {
   return (
     <ButtonComponent
@@ -31,7 +42,14 @@ const Button = ({
       className={className}
       disabled={disabled}
     >
-      {label}
+      {icon ? (
+        <div className='flex w-full items-center'>
+          <span className='ml-5'>{icon}</span>
+          <span className='flex-1 text-center'>{label}</span>
+        </div>
+      ) : (
+        label
+      )}
     </ButtonComponent>
   );
 };

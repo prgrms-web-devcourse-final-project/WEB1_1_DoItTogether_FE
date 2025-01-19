@@ -5,12 +5,12 @@ import { getMyInitState } from '@/services/user/getMyInitState';
 export const useLanding = () => {
   const navigate = useNavigate();
 
-  const handleLoginButton = () => {
+  const handleLogin = (provider: 'kakao' | 'google' | 'naver') => {
     if (localStorage.getItem('access_token')) {
       navigate('/group-select');
       return;
     }
-    window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`;
+    window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/${provider}`;
   };
 
   useEffect(() => {
@@ -30,5 +30,5 @@ export const useLanding = () => {
     checkInitialState();
   }, [navigate]);
 
-  return { handleLoginButton };
+  return { handleLogin };
 };
