@@ -6,8 +6,15 @@ import MetaTags from '@/components/common/metaTags/MetaTags';
 import { useParams } from 'react-router-dom';
 
 const AccountManagePage = () => {
-  const { showAlert, setShowAlert, handleBack, handleLogout, handleLeave, onConfirm } =
-    useAccountManage();
+  const {
+    showAlert,
+    setShowAlert,
+    handleBack,
+    handleLogout,
+    handleLeave,
+    handleNotice,
+    onConfirm,
+  } = useAccountManage();
   const { channelId } = useParams();
 
   return (
@@ -25,6 +32,16 @@ const AccountManagePage = () => {
         onConfirm={handleLogout}
         open={showAlert}
         onOpenChange={setShowAlert}
+      />
+      <AccountMenuItem
+        label='이용약관'
+        iconType='terms'
+        handleClick={() => handleNotice('terms')}
+      />
+      <AccountMenuItem
+        label='개인정보 처리방침'
+        iconType='course'
+        handleClick={() => handleNotice('course')}
       />
       <AccountMenuItem label='탈퇴하기' iconType='탈퇴' handleClick={handleLeave} />
     </div>
