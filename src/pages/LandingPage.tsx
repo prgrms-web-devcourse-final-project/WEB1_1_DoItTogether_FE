@@ -43,17 +43,17 @@ const LandingPage = () => {
           <LoginButton
             provider='kakao'
             handleLoginButton={() => handleLogin('kakao')}
-            label='카카오'
-          />
-          <LoginButton
-            provider='google'
-            handleLoginButton={() => handleLogin('google')}
-            label='구글'
+            label='카카오로 3초만에 시작하기'
           />
           <LoginButton
             provider='naver'
             handleLoginButton={() => handleLogin('naver')}
-            label='네이버'
+            label='네이버로 시작하기'
+          />
+          <LoginButton
+            provider='google'
+            handleLoginButton={() => handleLogin('google')}
+            label='Google로 시작하기'
           />
         </div>
       </motion.div>
