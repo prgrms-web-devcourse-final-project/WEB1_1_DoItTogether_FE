@@ -26,6 +26,11 @@ const AccountMenuItem = forwardRef<HTMLDivElement, AccountMenuItemProps>(
               <ArrowRightIcon className='text-gray3' />
             </div>
           )}
+          {(iconType === 'terms' || iconType === 'course') && (
+            <div className='' onClick={handleClick}>
+              <ArrowRightIcon className='text-gray3' />
+            </div>
+          )}
         </div>
       </div>
     );
