@@ -13,6 +13,7 @@ import useFunnel from '@/hooks/useFunnel';
 import useLoadingState from '@/hooks/survey/useLoadingState';
 import useUserName from '@/hooks/survey/useUserName';
 import useSurveyState from '@/hooks/survey/useSurveyState';
+import { StepType } from '@/types/surveySteps';
 
 const SurveyPage = () => {
   const item = {
@@ -26,9 +27,7 @@ const SurveyPage = () => {
     },
   };
 
-  const [Funnel, setStep, currentStep] = useFunnel<
-    '첫번째' | '두번째' | '세번째' | '네번째' | '설문결과'
-  >('첫번째');
+  const [Funnel, setStep, currentStep] = useFunnel<StepType>('첫번째');
 
   //로딩 상태 관리 커스텀 훅
   const { isLoading, isCompleted, setIsLoading, setIsCompleted } = useLoadingState();

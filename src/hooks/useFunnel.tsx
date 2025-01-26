@@ -1,3 +1,4 @@
+import { StepType } from '@/types/surveySteps';
 import React, { useState } from 'react';
 
 interface StepProps<T> {
@@ -13,7 +14,7 @@ type FunnelComponent<T> = React.FC<FunnelProps<T>> & {
   Step: React.FC<StepProps<T>>;
 };
 
-const useFunnel = <T extends string>(initialStep: T) => {
+const useFunnel = <T extends StepType>(initialStep: T) => {
   const [step, setStep] = useState<T>(initialStep);
 
   const Step = (props: StepProps<T>) => {

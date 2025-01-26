@@ -1,9 +1,8 @@
+import { StepType } from './../../types/surveySteps';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postPersonalKeyword } from '@/services/onboarding/postPersonalKeyword';
 import { patchMyInitState } from '@/services/user/patchMyInitState';
-
-type StepType = '첫번째' | '두번째' | '세번째' | '네번째' | '설문결과';
 
 interface useSurveyStateProps {
   currentStep: StepType;
