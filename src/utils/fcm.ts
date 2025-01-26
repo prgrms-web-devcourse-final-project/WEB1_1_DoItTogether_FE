@@ -13,18 +13,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging: Messaging = getMessaging(app);
 
-export const requestForToken = (): Promise<string | null> => {
+export const requestForToken = () => {
   return getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY })
     .then((currentToken: string) => {
       if (currentToken) {
         return currentToken;
       } else {
-        alert('No registration token available. Request permission to generate one.');
+        console.log('No registration token available. Request permission to generate one.');
         return null;
       }
     })
     .catch((err: Error) => {
-      alert('An error occurred while retrieving token - ' + err);
+      console.log('An error occurred while retrieving token - ' + err);
       return null;
     });
+};
+
+export const setupPushNotifications = async () => {
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') return await requestForToken();
+  return null;
 };
