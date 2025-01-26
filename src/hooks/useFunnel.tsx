@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-type StepProps<T> = {
+interface StepProps<T> {
   children: React.ReactNode;
   name: T;
-};
+}
 
 type FunnelProps<T> = {
   children: React.ReactElement<StepProps<T>>[] | React.ReactElement<StepProps<T>>;
