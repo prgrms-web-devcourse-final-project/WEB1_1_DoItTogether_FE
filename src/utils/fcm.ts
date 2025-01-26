@@ -29,8 +29,27 @@ export const requestForToken = () => {
     });
 };
 
-export const setupPushNotifications = async () => {
+// 기기 유형 확인
+const getPlatformType = (): string => {
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (/android/i.test(userAgent)) {
+    return 'ANDROID';
+  }
+  if (/iphone|ipad|ipod/i.test(userAgent)) {
+    return 'IOS';
+  }
+  return 'PC';
+};
+
+export const setupPushNotifications = async (): Promise<{
+  token: string | null;
+  platformType: string;
+} | null> => {
   const permission = await Notification.requestPermission();
-  if (permission === 'granted') return await requestForToken();
+  if (permission === 'granted') {
+    const token = await requestForToken();
+    const platformType = getPlatformType();
+    return { token, platformType };
+  }
   return null;
 };
