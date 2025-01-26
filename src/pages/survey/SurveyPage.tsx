@@ -71,71 +71,41 @@ const SurveyPage = () => {
           {/* 본문 */}
           <Funnel>
             <Funnel.Step name='첫번째'>
-              <motion.div
-                className='flex flex-1 flex-col gap-8 px-5'
-                variants={item}
-                initial='hidden'
-                animate='show'
-              >
-                <Step1
-                  title={`평소 정리정돈에 대해\n어떻게 생각하시나요?`}
-                  questions={DUMMY_QUESTION_STEP1}
-                  handleNextStep={handleNextStep}
-                />
-              </motion.div>
+              <Step1
+                title={`평소 정리정돈에 대해\n어떻게 생각하시나요?`}
+                questions={DUMMY_QUESTION_STEP1}
+                handleNextStep={handleNextStep}
+              />
             </Funnel.Step>
             <Funnel.Step name='두번째'>
-              <motion.div
-                className='flex flex-1 flex-col gap-8 px-5'
-                variants={item}
-                initial='hidden'
-                animate='show'
-              >
-                <Step2
-                  title={`어떤 방식으로 일하는 것을\n선호하시나요?`}
-                  questions={DUMMY_QUESTION_STEP2}
-                  handleNextStep={handleNextStep}
-                />
-              </motion.div>
+              <Step2
+                title={`어떤 방식으로 일하는 것을\n선호하시나요?`}
+                questions={DUMMY_QUESTION_STEP2}
+                handleNextStep={handleNextStep}
+              />
             </Funnel.Step>
             <Funnel.Step name='세번째'>
-              <motion.div
-                className='flex flex-1 flex-col gap-8 px-5'
-                variants={item}
-                initial='hidden'
-                animate='show'
-              >
-                <Step3
-                  title={`주변 환경이\n작업에 얼마나 영향을 주나요?`}
-                  questions={DUMMY_QUESTION_STEP3}
-                  handleNextStep={handleNextStep}
-                />
-              </motion.div>
+              <Step3
+                title={`주변 환경이\n작업에 얼마나 영향을 주나요?`}
+                questions={DUMMY_QUESTION_STEP3}
+                handleNextStep={handleNextStep}
+              />
             </Funnel.Step>
             <Funnel.Step name='네번째'>
-              <motion.div
-                className='flex flex-1 flex-col gap-8 px-5'
-                variants={item}
-                initial='hidden'
-                animate='show'
-              >
-                {progressStep !== 5 && (
-                  <Step4
-                    title={`집안일을 할 때\n어떤 감정을 느끼시나요?`}
-                    questions={DUMMY_QUESTION_STEP4}
-                    handleNextStep={handleNextStep}
-                  />
-                )}
-              </motion.div>
+              {progressStep !== 5 && (
+                <Step4
+                  title={`집안일을 할 때\n어떤 감정을 느끼시나요?`}
+                  questions={DUMMY_QUESTION_STEP4}
+                  handleNextStep={handleNextStep}
+                />
+              )}
             </Funnel.Step>
             <Funnel.Step name='설문결과'>
-              <div className='flex flex-1 flex-col gap-8 px-5'>
-                <Step5
-                  title={`${username}님의 청소성향은`}
-                  results={result}
-                  handleDone={handleDone}
-                />
-              </div>
+              <Step5
+                title={`${username}님의 청소성향은`}
+                results={result}
+                handleDone={handleDone}
+              />
             </Funnel.Step>
           </Funnel>
         </>

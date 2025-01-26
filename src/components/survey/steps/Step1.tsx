@@ -41,7 +41,7 @@ const Step1 = ({ title, questions, handleNextStep }: Step1Props) => {
   return (
     <>
       <motion.div
-        className='flex flex-1 flex-col gap-3'
+        className='flex flex-1 flex-col gap-3 px-5'
         variants={container}
         initial='hidden'
         animate='show'
@@ -62,7 +62,7 @@ const Step1 = ({ title, questions, handleNextStep }: Step1Props) => {
           ))}
         </div>
       </motion.div>
-      <motion.div className='sticky bottom-6 bg-white'>
+      <motion.div className='sticky bottom-6 bg-white px-5'>
         <Button
           size={'large'}
           variant={!activeItem ? 'disabled' : 'full'}

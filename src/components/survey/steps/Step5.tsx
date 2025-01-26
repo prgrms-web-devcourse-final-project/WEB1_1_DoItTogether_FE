@@ -45,7 +45,7 @@ const Step5: React.FC<Step5Props> = ({ title, results, handleDone }) => {
   return (
     <>
       <motion.div
-        className='flex flex-1 flex-col gap-3'
+        className='flex flex-1 flex-col gap-3 px-5'
         variants={container}
         initial='hidden'
         animate='show'
@@ -65,7 +65,7 @@ const Step5: React.FC<Step5Props> = ({ title, results, handleDone }) => {
           ))}
         </motion.div>
       </motion.div>
-      <motion.div className='sticky bottom-6 bg-white'>
+      <motion.div className='sticky bottom-6 bg-white px-5'>
         <Button size={'large'} onClick={handleDone}>
           완료
         </Button>
