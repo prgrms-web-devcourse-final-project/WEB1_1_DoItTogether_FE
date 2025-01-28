@@ -42,14 +42,14 @@ const getPlatformType = (): string => {
 };
 
 export const setupPushNotifications = async (): Promise<{
-  token: string | null;
+  token: string;
   platformType: string;
 } | null> => {
   const permission = await Notification.requestPermission();
   if (permission === 'granted') {
     const token = await requestForToken();
     const platformType = getPlatformType();
-    return { token, platformType };
+    if (token) return { token, platformType };
   }
   return null;
 };
