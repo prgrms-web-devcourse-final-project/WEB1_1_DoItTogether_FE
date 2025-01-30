@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import { ServiceTitle, LoginButton } from '@/components/landing';
 import { useLanding } from '@/hooks/useLanding';
 import MetaTags from '@/components/common/metaTags/MetaTags';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const ServiceLogo = lazy(() => import('@/components/landing/ServiceLogo'));
 
 const LandingPage = () => {
   const { handleLogin } = useLanding();
+  const paddingClass = useDevicePadding();
 
   const container = {
     hidden: { opacity: 0 },
@@ -39,7 +41,7 @@ const LandingPage = () => {
             <ServiceLogo />
           </Suspense>
         </div>
-        <div className='sticky bottom-6 flex flex-col gap-4'>
+        <div className={`sticky bottom-6 ${paddingClass} flex flex-col gap-4`}>
           <LoginButton
             provider='kakao'
             handleLoginButton={() => handleLogin('kakao')}

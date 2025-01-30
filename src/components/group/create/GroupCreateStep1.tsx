@@ -1,6 +1,7 @@
 import Button from '@/components/common/button/Button/Button';
 import InputBox from '@/components/common/input/InputBox';
 import { INPUT_VALIDATION } from '@/constants/validation';
+import useDevicePadding from '@/hooks/useDevicePadding';
 import React, { useState } from 'react';
 
 interface GroupCreateStep1Props {
@@ -28,6 +29,8 @@ const GroupCreateStep1: React.FC<GroupCreateStep1Props> = ({
     }
   };
 
+  const paddingClass = useDevicePadding();
+
   return (
     <div className='flex h-full flex-col justify-between p-5'>
       <div>
@@ -41,7 +44,7 @@ const GroupCreateStep1: React.FC<GroupCreateStep1Props> = ({
           <p className='mt-1 text-main font-caption'>{INPUT_VALIDATION.roomName.errorMessage}</p>
         )}
       </div>
-      <div className='sticky bottom-6'>
+      <div className={`sticky bottom-6 ${paddingClass}`}>
         <Button
           label='다음'
           size='large'

@@ -7,6 +7,7 @@ import { Step1, Step2, Step3, Step4, Step5, LoadingScreen } from '@/components/s
 import { useSurvey } from '@/hooks/useSurvey';
 import MetaTags from '@/components/common/metaTags/MetaTags';
 import { BUTTON_TEXT } from '@/constants/onBoarding';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const SurveyPage: React.FC = () => {
   const {
@@ -60,8 +61,9 @@ const SurveyPage: React.FC = () => {
     </motion.div>
   );
 
+  const paddingClass = useDevicePadding();
   const renderButton = () => (
-    <motion.div className='sticky bottom-6 bg-white px-5'>
+    <motion.div className={`sticky bottom-6 ${paddingClass} bg-white px-5`}>
       <Button
         size={'large'}
         variant={!isValid ? 'disabled' : 'full'}
