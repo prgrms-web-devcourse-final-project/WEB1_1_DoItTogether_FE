@@ -6,7 +6,7 @@ import MetaTags from '@/components/common/metaTags/MetaTags';
 const ErrorPage = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    localStorage.getItem('access_token') ? navigate('/group-select') : navigate('/');
+    sessionStorage.getItem('access_token') ? navigate('/group-select') : navigate('/');
   };
   return (
     <div className={`flex h-screen flex-col items-center justify-between pb-6`}>

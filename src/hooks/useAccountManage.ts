@@ -11,7 +11,7 @@ export const useAccountManage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
     navigate('/');
   };
 
