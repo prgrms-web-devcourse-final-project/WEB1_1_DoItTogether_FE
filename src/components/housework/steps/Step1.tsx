@@ -1,6 +1,9 @@
-import { DueDateSheet, HouseworkForm, HouseWorkSheet } from '@/components/housework';
+import { HouseworkForm } from '@/components/housework';
 import { SelectedTime } from '@/hooks/useAddHouseWork';
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
+
+const HouseWorkSheet = lazy(() => import('@/components/housework/HouseWorkSheet/HouseWorkSheet'));
+const DueDateSheet = lazy(() => import('@/components/housework/DueDateSheet/DueDateSheet'));
 
 interface Step1Props {
   setTime: React.Dispatch<React.SetStateAction<SelectedTime | null>>;
@@ -49,17 +52,24 @@ const Step1 = ({
         setIsAllday={setIsAllday}
       />
 
-      <HouseWorkSheet
-        isOpen={isHouseWorkSheetOpen}
-        setOpen={setHouseWorkSheetOpen}
-        setTask={setTask}
-        setCategory={setCategory}
-      />
-      <DueDateSheet
-        isOpen={isDueDateSheetOpen}
-        setOpen={setDueDateSheetOpen}
-        setStartDate={setStartDate}
-      />
+      <Suspense fallback={<></>}>
+        {isHouseWorkSheetOpen && (
+          <HouseWorkSheet
+            isOpen={isHouseWorkSheetOpen}
+            setOpen={setHouseWorkSheetOpen}
+            setTask={setTask}
+            setCategory={setCategory}
+          />
+        )}
+      </Suspense>
+
+      <Suspense fallback={<></>}>
+        <DueDateSheet
+          isOpen={isDueDateSheetOpen}
+          setOpen={setDueDateSheetOpen}
+          setStartDate={setStartDate}
+        />
+      </Suspense>
     </>
   );
 };
