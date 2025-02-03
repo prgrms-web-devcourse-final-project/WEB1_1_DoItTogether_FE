@@ -6,7 +6,7 @@ export const useLanding = () => {
   const navigate = useNavigate();
 
   const handleLogin = (provider: 'kakao' | 'google' | 'naver') => {
-    if (localStorage.getItem('access_token')) {
+    if (sessionStorage.getItem('access_token')) {
       navigate('/group-select');
       return;
     }
@@ -17,7 +17,7 @@ export const useLanding = () => {
     const checkInitialState = async () => {
       const accessToken = new URLSearchParams(location.search).get('access_token');
       if (accessToken) {
-        localStorage.setItem('access_token', accessToken);
+        sessionStorage.setItem('access_token', accessToken);
         try {
           const initState = await getMyInitState();
           initState.result ? navigate('/group-select') : navigate('/register');
