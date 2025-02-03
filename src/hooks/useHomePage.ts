@@ -17,7 +17,10 @@ import { getMyInfo } from '@/services/user/getMyInfo';
 import { getWeeklyIncomplete } from '@/services/housework/getWeeklyIncomplete';
 import { postCompliment } from '@/services/noticeManage/postCompliment';
 import { postPoke } from '@/services/noticeManage/postPoke';
+import { postFcmToken } from '@/services/fcm/postFcmToken';
 import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
+
+import { setupPushNotifications } from '@/utils/fcm';
 
 export const useHomePage = () => {
   const {
@@ -105,6 +108,26 @@ export const useHomePage = () => {
     fetchGroupUsers();
   }, [channelId]);
 
+  useEffect(() => {
+    const initNotification = async () => {
+      const notificationResult = await setupPushNotifications();
+      if (notificationResult) {
+        const FCM_TOKEN = 'fcm_token';
+        const { token, platformType } = notificationResult;
+        const storedToken = sessionStorage.getItem(FCM_TOKEN);
+        if (!storedToken || storedToken !== token) {
+          try {
+            await postFcmToken({ token, platformType });
+            sessionStorage.setItem(FCM_TOKEN, token);
+          } catch (error) {
+            console.error('Error posting FCM token:', error);
+          }
+        }
+      }
+    };
+    initNotification();
+  }, []);
+
   const updateWeeklyIncomplete = useCallback(async () => {
     try {
       const currWeekResult = await getWeeklyIncomplete({
@@ -153,6 +176,10 @@ export const useHomePage = () => {
             channelId,
             targetUserId: targetHousework.userId,
             reactDate: targetHousework.startDate,
+            notificationRequest: {
+              title: `${myInfo?.nickName}님이 당신을 칭찬했습니다.`,
+              content: `${targetHousework.task}을(를) 완벽히 수행하셨군요.`,
+            },
           });
           toast({ title: `${targetHousework.assignee}님을 칭찬했어요` });
         } catch (error) {
@@ -164,6 +191,10 @@ export const useHomePage = () => {
             channelId,
             targetUserId: targetHousework.userId!,
             reactDate: targetHousework.startDate!,
+            notificationRequest: {
+              title: `${myInfo?.nickName}님이 당신을 찔렀습니다.`,
+              content: `${targetHousework.task}을(를) 완료해주세요.`,
+            },
           });
           toast({ title: `${targetHousework.assignee}님을 찔렀어요` });
         } catch (error) {

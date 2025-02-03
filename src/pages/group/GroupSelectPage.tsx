@@ -3,8 +3,10 @@ import GroupSelectTitle from '@/components/groupSelect/GroupSelectTitle/GroupSel
 import MetaTags from '@/components/common/metaTags/MetaTags';
 import GroupList from '@/components/groupSelect/GroupList/GroupList';
 import { useGroupSelect } from '@/hooks/useGroupSelect';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const GroupSelectPage = () => {
+  const paddingClass = useDevicePadding();
   const { isLoading, groups, handleMakeGroupBtnClick, handleInvitedBtnClick, handleClick } =
     useGroupSelect();
 
@@ -23,7 +25,7 @@ const GroupSelectPage = () => {
       <div className='flex flex-1 flex-col px-5 py-4'>
         <GroupList groups={groups} handleClick={handleClick} />
       </div>
-      <div className='sticky bottom-6 flex gap-x-4 px-5'>
+        <div className={`sticky bottom-6 ${paddingClass} flex gap-x-4 px-5`}>
         <Button
           label='방만들기'
           variant='full'

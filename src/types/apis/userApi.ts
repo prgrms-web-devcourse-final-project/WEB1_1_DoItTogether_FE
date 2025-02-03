@@ -12,6 +12,8 @@ export interface UserBase {
   socialId: string;
   /** user 프로필 이미지 */
   profileImageUrl: string;
+  /** user 로그인 정보 */
+  provider: string;
 }
 
 /** 특정 회원 조회 req */

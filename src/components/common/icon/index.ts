@@ -37,3 +37,6 @@ export { default as BroomDustIcon } from './BroomDustIcon';
 export { default as BubbleIcon } from './BubbleIcon';
 export { default as ShinyIcon } from './ShinyIcon';
 export { default as ProfileDefaultIcon } from './ProfileDefaultIcon';
+export { default as NaverIcon } from './NaverIcon';
+export { default as GoogleIcon } from './GoogleIcon';
+export { default as KakaoIcon } from './KakaoIcon';

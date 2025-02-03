@@ -4,13 +4,15 @@ import LeaveGuide from '@/components/my/LeaveGuide/LeaveGuide';
 import { useLeave } from '@/hooks/useLeave';
 import MetaTags from '@/components/common/metaTags/MetaTags';
 import { useParams } from 'react-router-dom';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const LeavePage = () => {
   const { isChecked, handleBack, handleCheckboxChange, handleDone } = useLeave();
   const { channelId } = useParams();
+  const paddingClass = useDevicePadding();
 
   return (
-    <div className={`flex h-screen flex-col gap-6`}>
+    <div className={`flex h-screen flex-col gap-6 ${paddingClass}`}>
       <MetaTags
         title={'두잇투게더 - 탈퇴'}
         description={'두잇투게더에서 탈퇴할 수 있습니다.'}

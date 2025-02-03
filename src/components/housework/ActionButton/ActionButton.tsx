@@ -19,7 +19,7 @@ const ActionButton = ({ step, isLoading, isDisabled, handleNextClick }: ActionBu
       label={BUTTON_TITLES[step as 1 | 2]}
       handleClick={handleNextClick}
       disabled={isDisabled}
-      className='sticky bottom-6'
+      className='sticky bottom-6 mb-6'
     />
   );
 };

@@ -1,5 +1,10 @@
 import useAddHouseWork from '@/hooks/useAddHouseWork';
-import { ManagerSelectSheet, TaskAssignmentContent } from '@/components/housework';
+import { TaskAssignmentContent } from '@/components/housework';
+import { lazy, Suspense } from 'react';
+
+const ManagerSelectSheet = lazy(
+  () => import('@/components/housework/ManagerSelectSheet/ManagerSelectSheet')
+);
 
 const Step2 = () => {
   const {
@@ -20,14 +25,16 @@ const Step2 = () => {
         members={members}
         handleManagerClick={handleManagerClick}
       />
-      <ManagerSelectSheet
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        setSelectedValue={setSelectedValue}
-        selectedValue={selectedValue}
-        handleDoneClick={handleDoneClick}
-        members={members}
-      />
+      <Suspense fallback={<></>}>
+        <ManagerSelectSheet
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          setSelectedValue={setSelectedValue}
+          selectedValue={selectedValue}
+          handleDoneClick={handleDoneClick}
+          members={members}
+        />
+      </Suspense>
     </>
   );
 };

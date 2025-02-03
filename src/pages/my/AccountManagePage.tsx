@@ -4,11 +4,20 @@ import AccountMenuItem from '@/components/my/AccountMenuItem/AccountMenuItem';
 import { useAccountManage } from '@/hooks/useAccountManage';
 import MetaTags from '@/components/common/metaTags/MetaTags';
 import { useParams } from 'react-router-dom';
+import { useMy } from '@/hooks/useMy';
 
 const AccountManagePage = () => {
-  const { showAlert, setShowAlert, handleBack, handleLogout, handleLeave, onConfirm } =
-    useAccountManage();
+  const {
+    showAlert,
+    setShowAlert,
+    handleBack,
+    handleLogout,
+    handleLeave,
+    handleNotice,
+    onConfirm,
+  } = useAccountManage();
   const { channelId } = useParams();
+  const { myInfo } = useMy();
 
   return (
     <div>
@@ -18,13 +27,23 @@ const AccountManagePage = () => {
         url={`https://doit-together.vercel.app/my-page/account-manage/${channelId}/`}
       />
       <Header title='계정 관리' isNeededDoneBtn={false} handleBack={handleBack} />
-      <AccountMenuItem label='카카오톡' state='연결됨' />
+      <AccountMenuItem label={myInfo.provider} state='연결됨' />
       <AlertDialogProps
         title='로그아웃 하시겠습니까?'
         trigger={<AccountMenuItem label='로그아웃' iconType='로그아웃' handleClick={onConfirm} />}
         onConfirm={handleLogout}
         open={showAlert}
         onOpenChange={setShowAlert}
+      />
+      <AccountMenuItem
+        label='이용약관'
+        iconType='terms'
+        handleClick={() => handleNotice('terms')}
+      />
+      <AccountMenuItem
+        label='개인정보 처리방침'
+        iconType='course'
+        handleClick={() => handleNotice('course')}
       />
       <AccountMenuItem label='탈퇴하기' iconType='탈퇴' handleClick={handleLeave} />
     </div>

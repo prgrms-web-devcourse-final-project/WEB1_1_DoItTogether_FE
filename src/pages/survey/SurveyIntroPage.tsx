@@ -5,6 +5,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LottieIcon from '@/components/common/lottie/LottieIcon';
 import MetaTags from '@/components/common/metaTags/MetaTags';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const SurveyIntroPage: React.FC = () => {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ const SurveyIntroPage: React.FC = () => {
     },
   };
 
+  const paddingClass = useDevicePadding();
+
   return (
     <>
       <MetaTags
@@ -55,7 +58,7 @@ const SurveyIntroPage: React.FC = () => {
         <motion.div variants={item} className='h-96'>
           <LottieIcon />
         </motion.div>
-        <motion.div variants={item} className='sticky bottom-6'>
+        <motion.div variants={item} className={`sticky bottom-6 ${paddingClass}`}>
           <Button
             size='large'
             variant='full'

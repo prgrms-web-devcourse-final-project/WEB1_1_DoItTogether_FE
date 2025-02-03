@@ -5,19 +5,19 @@ import { getMyInitState } from '@/services/user/getMyInitState';
 export const useLanding = () => {
   const navigate = useNavigate();
 
-  const handleLoginButton = () => {
-    if (localStorage.getItem('access_token')) {
+  const handleLogin = (provider: 'kakao' | 'google' | 'naver') => {
+    if (sessionStorage.getItem('access_token')) {
       navigate('/group-select');
       return;
     }
-    window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`;
+    window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/${provider}`;
   };
 
   useEffect(() => {
     const checkInitialState = async () => {
       const accessToken = new URLSearchParams(location.search).get('access_token');
       if (accessToken) {
-        localStorage.setItem('access_token', accessToken);
+        sessionStorage.setItem('access_token', accessToken);
         try {
           const initState = await getMyInitState();
           initState.result ? navigate('/group-select') : navigate('/register');
@@ -30,5 +30,5 @@ export const useLanding = () => {
     checkInitialState();
   }, [navigate]);
 
-  return { handleLoginButton };
+  return { handleLogin };
 };
