@@ -2,6 +2,7 @@ import SurveyTitle from '@/components/survey/SurveyTitle/SurveyTitle';
 import TextTag from '@/components/common/tag/TextTag/TextTag';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/common/ui/button';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 interface Step5Props {
   title: string;
@@ -10,6 +11,8 @@ interface Step5Props {
 }
 
 const Step5: React.FC<Step5Props> = ({ title, results, handleDone }) => {
+  const paddingClass = useDevicePadding();
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -65,7 +68,7 @@ const Step5: React.FC<Step5Props> = ({ title, results, handleDone }) => {
           ))}
         </motion.div>
       </motion.div>
-      <motion.div className='sticky bottom-6 bg-white px-5'>
+      <motion.div className={`sticky bottom-6 ${paddingClass} bg-white px-5`}>
         <Button size={'large'} onClick={handleDone}>
           완료
         </Button>

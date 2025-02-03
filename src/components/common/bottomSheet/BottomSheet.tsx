@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import BottomSheetTitle from '@/components/common/bottomSheet/BottomSheetTitle/BottomSheetTitle';
 import CloseBtn from '@/components/common/bottomSheet/CloseBtn/CloseBtn';
 import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 interface BottomSheetProps {
   /** 바텀시트 오픈 여부 */
@@ -52,6 +53,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     [memoizedTitle]
   );
 
+  const paddingClass = useDevicePadding();
+
   return (
     <>
       <Sheet
@@ -61,7 +64,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         disableDrag={true}
       >
         <div className='relative mx-auto h-full w-full max-w'>
-          <Sheet.Container>
+          <Sheet.Container className={`${paddingClass}`}>
             {closeBtn && <CloseBtn handleClick={handleClick} />}
             {SheetHeader}
             <Sheet.Content>{children}</Sheet.Content>

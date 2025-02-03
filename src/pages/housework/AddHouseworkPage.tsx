@@ -4,6 +4,7 @@ import useAddHouseWork from '@/hooks/useAddHouseWork';
 import { STEP_TITLES } from '@/constants/addHousework';
 import { useMemo } from 'react';
 import ActionButton from '@/components/housework/ActionButton/ActionButton';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const AddHouseworkPage = ({}) => {
   const {
@@ -32,8 +33,10 @@ const AddHouseworkPage = ({}) => {
     [step, task, startDate, userId]
   );
 
+  const paddingClass = useDevicePadding();
+
   return (
-    <div className='flex h-screen flex-col gap-4 px-5 pb-6'>
+    <div className={`flex h-screen flex-col gap-4 px-5 ${paddingClass}`}>
       {houseworkId ? (
         <MetaTags
           title={'두잇투게더 - 집안일 수정'}

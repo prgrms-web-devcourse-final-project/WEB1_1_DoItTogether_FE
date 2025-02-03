@@ -3,6 +3,7 @@ import SurveyTitle from '@/components/survey/SurveyTitle/SurveyTitle';
 import MenuSelect from '@/components/survey/MenuSelect/MenuSelect';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/common/ui/button';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 interface Step1Props {
   title: string;
@@ -11,6 +12,8 @@ interface Step1Props {
 }
 
 const Step1 = ({ title, questions, handleNextStep }: Step1Props) => {
+  const paddingClass = useDevicePadding();
+
   const [activeItem, setActiveItem] = useState('');
   const memoizedTitle = useMemo(() => title, [title]);
 
@@ -62,7 +65,7 @@ const Step1 = ({ title, questions, handleNextStep }: Step1Props) => {
           ))}
         </div>
       </motion.div>
-      <motion.div className='sticky bottom-6 bg-white px-5'>
+      <motion.div className={`sticky bottom-6 ${paddingClass} bg-white px-5`}>
         <Button
           size={'large'}
           variant={!activeItem ? 'disabled' : 'full'}

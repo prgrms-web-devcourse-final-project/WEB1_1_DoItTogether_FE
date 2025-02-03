@@ -7,9 +7,12 @@ import RegisterNotice from '@/components/register/RegisterNotice';
 import { INPUT_VALIDATION } from '@/constants/validation';
 import { useRegister } from '@/hooks/useRegister';
 import MetaTags from '@/components/common/metaTags/MetaTags';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const RegisterPage = () => {
   const { name, profileUrl, error, handleNameChange, handleSubmitButton } = useRegister();
+
+  const paddingClass = useDevicePadding();
 
   return (
     <div className={`flex h-screen w-full flex-col items-center justify-between px-5 pt-10`}>
@@ -35,7 +38,7 @@ const RegisterPage = () => {
           <RegisterNotice />
         </div>
       </div>
-      <div className='sticky bottom-6 w-full'>
+      <div className={`sticky bottom-6 ${paddingClass} w-full`}>
         <Button
           label='확인'
           variant='full'
