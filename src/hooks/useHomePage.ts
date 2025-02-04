@@ -181,9 +181,10 @@ export const useHomePage = () => {
               content: `${targetHousework.task}을(를) 완벽히 수행하셨군요.`,
             },
           });
-          toast({ title: `${targetHousework.assignee}님을 칭찬했어요` });
+          toast({ title: `${targetHousework.assignee}님을 칭찬했어요.` });
         } catch (error) {
           console.error('칭찬하기 실패:', error);
+          toast({ title: `오류가 발생했어요.` });
         }
       } else {
         try {
@@ -199,6 +200,7 @@ export const useHomePage = () => {
           toast({ title: `${targetHousework.assignee}님을 찔렀어요` });
         } catch (error) {
           console.error('찌르기 실패:', error);
+          toast({ title: `오류가 발생했어요.` });
         }
       }
     },
