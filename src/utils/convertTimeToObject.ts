@@ -1,6 +1,6 @@
-import { SelectedTime } from "@/pages/HouseWorkStepOnePage";
+import { SelectedTime } from '@/hooks/useAddHouseWork';
 
-export default function convertTimeToObject(timeString: string):SelectedTime {
+export default function convertTimeToObject(timeString: string): SelectedTime {
   // 입력된 시간 문자열을 분리합니다.
   const [hour, minute] = timeString.split(':').map(Number);
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import TextTag from '@/components/common/tag/TextTag/TextTag';
 import CompletionText from '@/components/statistics/weekly/WeeklyCompletion/CompletionText/CompletionText';
 import CompletionBarGraph from '@/components/statistics/weekly/WeeklyCompletion/CompletionBarGraph/CompletionBarGraph';
@@ -6,9 +5,11 @@ import { Card } from '@/components/common/ui/card';
 import { WeeklyTotalCount } from '@/store/useWeeklyStatisticsStore';
 import { WEEKLY_STAT_STEP } from '@/constants';
 
-const WeeklyCompletion: React.FC<
-  Pick<WeeklyTotalCount, 'channelName' | 'completeCount' | 'unCompletedCount'>
-> = ({ channelName, completeCount, unCompletedCount }) => {
+const WeeklyCompletion = ({
+  channelName,
+  completeCount,
+  unCompletedCount,
+}: Pick<WeeklyTotalCount, 'channelName' | 'completeCount' | 'unCompletedCount'>) => {
   const totalCount = completeCount + unCompletedCount;
   const completionRate = totalCount > 0 ? (completeCount / totalCount) * 100 : 0; // 완료율 계산
 
@@ -17,7 +18,7 @@ const WeeklyCompletion: React.FC<
   );
 
   return (
-    <Card className='mb-4 border-none px-5 pb-4 shadow-none'>
+    <Card className='mb-4 border-none px-5 shadow-none'>
       <div className='flex w-full items-center justify-between py-5 pl-5'>
         <div className='flex flex-col gap-3'>
           <div className='flex items-center gap-2'>
@@ -36,7 +37,7 @@ const WeeklyCompletion: React.FC<
         </div>
         {currentStep?.icon && <currentStep.icon />}
       </div>
-      <div>
+      <div className='pb-4'>
         <CompletionBarGraph completionRate={completionRate} />
       </div>
     </Card>

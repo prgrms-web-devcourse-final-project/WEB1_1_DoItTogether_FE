@@ -1,5 +1,6 @@
 import { ArrowRightIcon, HomeIcon, PlusIcon } from '@/components/common/icon';
 import { Button } from '@/components/common/ui/button';
+import React from 'react';
 
 interface OpenSheetBtnProps {
   /** 셀렉트 버튼 title*/
@@ -10,6 +11,12 @@ interface OpenSheetBtnProps {
   icon?: React.ReactNode;
 }
 
+const ICONS = {
+  HOME: <HomeIcon width={24} height={24} />,
+  PLUS: <PlusIcon width={20} height={20} className='text-gray3' />,
+  ARROW_RIGHT: <ArrowRightIcon className='text-main' />,
+} as const;
+
 const OpenSheetBtn: React.FC<OpenSheetBtnProps> = ({
   text,
   handleClick,
@@ -18,26 +25,20 @@ const OpenSheetBtn: React.FC<OpenSheetBtnProps> = ({
 }: OpenSheetBtnProps) => {
   return (
     <Button
-      variant={type === 'housework' ? 'group' : 'group'}
+      variant='group'
       size='large'
       className='items-center !justify-between bg-white px-3'
       onClick={handleClick}
     >
       <div className='flex items-center gap-x-4'>
-        {type === 'housework' ? '' : <HomeIcon width={24} height={24} />}
+        {type === 'housework' ? '' : ICONS.HOME}
         {type === 'housework' && icon}
         <div className='text-gray3 font-body'>{text}</div>
       </div>
 
-      <div>
-        {type === 'housework' ? (
-          <PlusIcon width={20} height={20} className='text-gray3' />
-        ) : (
-          <ArrowRightIcon className='text-main' />
-        )}
-      </div>
+      <div>{type === 'housework' ? ICONS.PLUS : ICONS.ARROW_RIGHT}</div>
     </Button>
   );
 };
 
-export default OpenSheetBtn;
+export default React.memo(OpenSheetBtn);

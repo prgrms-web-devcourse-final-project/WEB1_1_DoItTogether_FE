@@ -1,11 +1,9 @@
-import React from 'react';
-
 interface AccountInfoProps {
   nickname: string;
   account: string;
 }
 
-const AccountInfo: React.FC<AccountInfoProps> = ({ nickname, account }) => {
+const AccountInfo = ({ nickname, account }: AccountInfoProps) => {
   return (
     <div className='flex flex-col justify-between'>
       <div className='font-body'>{nickname}</div>

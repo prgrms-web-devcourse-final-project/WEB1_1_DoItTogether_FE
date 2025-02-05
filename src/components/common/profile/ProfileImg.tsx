@@ -7,7 +7,7 @@ interface ProfileImgProps {
   imageUrl?: string;
 }
 
-const ProfileImg: React.FC<ProfileImgProps> = ({ classname, imageUrl = '' }) => {
+const ProfileImg = ({ classname, imageUrl = '' }: ProfileImgProps) => {
   const location = useLocation();
   const isEditPage = location.pathname.includes('edit');
 
@@ -16,6 +16,7 @@ const ProfileImg: React.FC<ProfileImgProps> = ({ classname, imageUrl = '' }) => 
       <div className='flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gray4'>
         {imageUrl ? (
           <img
+            loading='lazy'
             src={imageUrl}
             alt='프로필 사진'
             className='h-full w-full rounded-full object-cover'

@@ -1,20 +1,33 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import SurveyTitle from '@/components/survey/SurveyTitle/SurveyTitle';
 import MenuSelect from '@/components/survey/MenuSelect/MenuSelect';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/common/ui/button';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 interface Step4Props {
   title: string;
   questions: string[];
-  handleAnswer: (text: string) => void;
+  handleNextStep: (selectedItem?: string) => void;
 }
 
-const Step4: React.FC<Step4Props> = ({ title, questions, handleAnswer }) => {
+const Step4: React.FC<Step4Props> = ({ title, questions, handleNextStep }) => {
+  const paddingClass = useDevicePadding();
+
   const [activeItem, setActiveItem] = useState('');
 
+  const memoizedTitle = useMemo(() => title, [title]);
+
   const handleSelect = (content: string) => {
-    setActiveItem(content);
-    handleAnswer(content);
+    if (activeItem === content) {
+      setActiveItem('');
+    } else {
+      setActiveItem(content);
+    }
+  };
+
+  const onNext = () => {
+    handleNextStep(activeItem);
   };
 
   const container = {
@@ -30,28 +43,40 @@ const Step4: React.FC<Step4Props> = ({ title, questions, handleAnswer }) => {
   };
 
   return (
-    <motion.div
-      className='flex flex-1 flex-col gap-3'
-      variants={container}
-      initial='hidden'
-      animate='show'
-    >
-      <div className='mb-5'>
-        <SurveyTitle title={title} />
-      </div>
+    <>
+      <motion.div
+        className='flex flex-1 flex-col gap-3 px-5'
+        variants={container}
+        initial='hidden'
+        animate='show'
+      >
+        <div className='mb-5'>
+          <SurveyTitle title={memoizedTitle} />
+        </div>
 
-      <div className='flex flex-wrap gap-3'>
-        {questions.map(question => (
-          <MenuSelect
-            key={question}
-            type='large'
-            status={activeItem === question ? 'active' : 'inActive'}
-            content={question}
-            handleSelect={() => handleSelect(question)}
-          />
-        ))}
-      </div>
-    </motion.div>
+        <div className='flex flex-wrap gap-3'>
+          {questions.map(question => (
+            <MenuSelect
+              key={question}
+              type='large'
+              status={activeItem === question ? 'active' : 'inActive'}
+              content={question}
+              handleSelect={() => handleSelect(question)}
+            />
+          ))}
+        </div>
+      </motion.div>
+      <motion.div className={`sticky bottom-6 ${paddingClass} bg-white px-5`}>
+        <Button
+          size={'large'}
+          variant={!activeItem ? 'disabled' : 'full'}
+          disabled={!activeItem}
+          onClick={onNext}
+        >
+          다음
+        </Button>
+      </motion.div>
+    </>
   );
 };
 

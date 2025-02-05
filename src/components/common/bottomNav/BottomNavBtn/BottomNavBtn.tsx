@@ -25,4 +25,4 @@ const BottomNavBtn: React.FC<BottomNavBtnProps> = ({
   );
 };
 
-export default BottomNavBtn;
+export default React.memo(BottomNavBtn);

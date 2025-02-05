@@ -58,7 +58,7 @@ const ManagerSelectSheet: React.FC<ManagerSelectSheetProps> = ({
             size='small'
             handleClick={handleClick}
           /> */}
-          <Button label='확인' variant='full' size='small' handleClick={handleDoneClick} />
+          <Button label='확인' variant='full' size='large' handleClick={handleDoneClick} />
         </div>
       </div>
     </BottomSheet>

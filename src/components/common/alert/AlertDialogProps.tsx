@@ -20,7 +20,7 @@ interface AlertDialogPropsProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-const AlertDialogProps: React.FC<AlertDialogPropsProps> = ({
+const AlertDialogProps = ({
   title,
   trigger,
   onConfirm,
@@ -28,7 +28,7 @@ const AlertDialogProps: React.FC<AlertDialogPropsProps> = ({
   cancelText = '취소',
   open,
   onOpenChange,
-}) => {
+}: AlertDialogPropsProps) => {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>

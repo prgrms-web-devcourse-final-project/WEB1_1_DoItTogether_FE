@@ -1,5 +1,4 @@
 import InputBox from '@/components/common/input/InputBox';
-import React from 'react';
 
 interface InputWithLabelProps {
   label: string;
@@ -9,13 +8,13 @@ interface InputWithLabelProps {
   handleChange?: (value: string) => void;
 }
 
-const InputWithLabel: React.FC<InputWithLabelProps> = ({
+const InputWithLabel = ({
   label,
   value,
   placeholder,
   disabled,
   handleChange,
-}) => {
+}: InputWithLabelProps) => {
   return (
     <div className='flex flex-col'>
       <p className='pb-4 text-black font-label'>{label}</p>

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PresetItem from '@/components/common/preset/PresetItem';
 import PresetTabItem from '@/components/common/tab/PresetTab/PresetTabItem';
 import { Tabs, TabsContent, TabsList } from '@/components/common/ui/tabs';
@@ -25,13 +26,13 @@ interface PresetTabProps {
   setCateActiveTab?: (cateActiveTab: string) => void;
   isPresetSettingCustom?: boolean;
   deleteButtonStates?: Record<number, boolean>;
-  handleDeleteClick?: (presetCategoryId: number, itemId: number) => void;
   isBottomSheet?: boolean;
-  handleClick?: (id: number, description: string, category: string) => void;
   selectedItem?: number | null;
+  handleDeleteClick?: (presetCategoryId: number, itemId: number) => void;
+  handleClick?: (id: number, description: string, category: string) => void;
 }
 
-const PresetTab: React.FC<PresetTabProps> = ({
+const PresetTab = ({
   presetData,
   cateActiveTab,
   setCateActiveTab,
@@ -41,7 +42,7 @@ const PresetTab: React.FC<PresetTabProps> = ({
   isBottomSheet = false,
   handleClick,
   selectedItem,
-}) => {
+}: PresetTabProps) => {
   const allPresetData = {
     category: PresetCategory.ALL,
     items: presetData.flatMap(categoryList =>
@@ -146,4 +147,4 @@ const PresetTab: React.FC<PresetTabProps> = ({
   );
 };
 
-export default PresetTab;
+export default memo(PresetTab);

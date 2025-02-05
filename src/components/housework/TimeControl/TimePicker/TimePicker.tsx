@@ -8,11 +8,11 @@ interface SelectedTime {
 }
 
 interface TimePickerProps {
-  onTimeChange: (time: SelectedTime) => void;
   initialTime?: SelectedTime | null;
+  setTime: React.Dispatch<React.SetStateAction<SelectedTime | null>>;
 }
 
-const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange, initialTime }) => {
+const TimePicker = ({ initialTime, setTime }: TimePickerProps) => {
   const [selectedTime, setSelectedTime] = useState<SelectedTime>(
     () =>
       initialTime || {
@@ -23,10 +23,8 @@ const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange, initialTime }) =>
   );
 
   useEffect(() => {
-    if (initialTime) {
-      setSelectedTime(initialTime);
-    }
-  }, [initialTime]);
+    setTime(selectedTime);
+  }, [selectedTime]);
 
   const formatHour = (relative: number) => {
     const hour = relative + 1;
@@ -65,10 +63,6 @@ const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange, initialTime }) =>
   const getInitialAMPMIndex = (ampm: 'AM' | 'PM') => {
     return ampm === 'AM' ? 0 : 1;
   };
-
-  useEffect(() => {
-    onTimeChange(selectedTime);
-  }, [selectedTime, onTimeChange]);
 
   return (
     <div className='flex w-full justify-center px-8'>

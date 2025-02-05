@@ -32,3 +32,8 @@ export const DUMMY_RESULT = [
   '청소 각오는 만땅!',
   '화장실 청소 좋아!',
 ];
+
+export const BUTTON_TEXT = {
+  NEXT: '다음',
+  COMPLETE: '완료',
+};

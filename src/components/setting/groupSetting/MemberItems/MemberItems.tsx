@@ -28,4 +28,4 @@ const MemberItems: React.FC<MemberItemsProps> = ({ leader, members, currentUser,
   );
 };
 
-export default MemberItems;
+export default React.memo(MemberItems);

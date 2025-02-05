@@ -22,8 +22,5 @@ const mockCategoryList = [
 export const Default: Story = {
   args: {
     categoryList: mockCategoryList,
-    handleAddInput: (inputVal: string, categoryId: number) => {
-      console.log(`Added "${inputVal}" to category ID: ${categoryId}`);
-    },
   },
 };

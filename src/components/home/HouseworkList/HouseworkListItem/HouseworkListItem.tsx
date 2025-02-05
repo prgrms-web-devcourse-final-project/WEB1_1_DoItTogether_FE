@@ -4,7 +4,7 @@ import HouseworkCategoryTag from '@/components/common/tag/HouseworkCatetoryTag/H
 import ControlDropdown from '@/components/home/ControlDropdown/ControlDropdown';
 import { Housework } from '@/types/apis/houseworkApi';
 import { HOUSEWORK_STATUS } from '@/constants/homePage';
-import convertTimeTo12HourFormat from '@/utils/convertTime';
+import { convertTimeTo12HourFormat } from '@/utils/timeUtils';
 import { ClockIcon } from '@/components/common/icon';
 import useHomePageStore from '@/store/useHomePageStore';
 

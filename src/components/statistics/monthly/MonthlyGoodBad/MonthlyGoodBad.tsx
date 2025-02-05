@@ -1,3 +1,4 @@
+import React from 'react';
 import { MonthFingerIcon, MonthlyHeartIcon } from '@/components/common/icon';
 
 interface MonthlyGoodBadProps {
@@ -5,7 +6,7 @@ interface MonthlyGoodBadProps {
   name: string | null;
 }
 
-const MonthlyGoodBad: React.FC<MonthlyGoodBadProps> = ({ type, name }) => {
+const MonthlyGoodBad = React.memo(({ type, name }: MonthlyGoodBadProps) => {
   return (
     <div
       className={`relative aspect-square w-full overflow-hidden rounded-2xl p-6 ${
@@ -35,6 +36,6 @@ const MonthlyGoodBad: React.FC<MonthlyGoodBadProps> = ({ type, name }) => {
       </div>
     </div>
   );
-};
+});
 
 export default MonthlyGoodBad;

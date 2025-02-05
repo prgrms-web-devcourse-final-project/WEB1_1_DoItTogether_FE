@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import BottomSheet from '@/components/common/bottomSheet/BottomSheet';
 import Button from '@/components/common/button/Button/Button';
 import PresetTab from '@/components/common/tab/PresetTab/PresetTab';
@@ -14,6 +14,8 @@ interface HouseWorkSheetProps {
   isOpen: boolean;
   /** isOpen 바꾸는 set함수 */
   setOpen: (isOpen: boolean) => void;
+  setTask: React.Dispatch<React.SetStateAction<string>>;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface PresetItem {
@@ -31,13 +33,20 @@ interface PresetList {
   presetItemList: Array<PresetItem>;
 }
 
-const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
-  const { setTask, setCategory, selectedItem, setSelectedItem } = useAddHouseWorkStore();
+const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({
+  isOpen,
+  setOpen,
+  setTask,
+  setCategory,
+}) => {
+  const { selectedItem, setSelectedItem } = useAddHouseWorkStore();
   const [activeTab, setActiveTab] = useState<string>(PresetTabName.PRESET_DATA);
   const [cateActiveTab, setCateActiveTab] = useState<string>(Category.ALL);
   const [presetData, setPresetData] = useState<PresetList[]>([]);
   const [selectedHouseWork, setSelectedHouseWork] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const memoizedPresetData = useMemo(() => presetData, [presetData]);
 
   // 현재 입장한 채널
   const { channelId: strChannelId } = useParams();
@@ -74,11 +83,11 @@ const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
     }
   };
 
-  const handleDoneClick = () => {
+  const handleDoneClick = useCallback(() => {
     setTask(selectedHouseWork ?? '');
     setCategory(selectedCategory ?? '');
     setOpen(false);
-  };
+  }, [selectedHouseWork, selectedCategory]);
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
@@ -107,7 +116,7 @@ const HouseWorkSheet: React.FC<HouseWorkSheetProps> = ({ isOpen, setOpen }) => {
             />
           </div>
           <PresetTab
-            presetData={presetData}
+            presetData={memoizedPresetData}
             cateActiveTab={cateActiveTab}
             setCateActiveTab={handleCateTabChange}
             isBottomSheet={true}

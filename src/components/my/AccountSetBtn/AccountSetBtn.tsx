@@ -1,9 +1,8 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { SettingIcon } from '@/components/common/icon';
 
-const AccountSetBtn: React.FC = () => {
+const AccountSetBtn = () => {
   const navigate = useNavigate();
   const { channelId } = useParams();
 

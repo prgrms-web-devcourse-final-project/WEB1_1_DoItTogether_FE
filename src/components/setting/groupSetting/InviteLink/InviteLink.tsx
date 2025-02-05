@@ -17,8 +17,12 @@ const InviteLink: React.FC<InviteLinkProps> = ({ initialLink }) => {
   const channelId = Number(strChannelId);
 
   const handleGenerateLink = async () => {
-    const response = await postCreateInviteLink({ channelId: channelId });
-    setInviteLink(`${response.result.inviteLink}`);
+    try {
+      const response = await postCreateInviteLink({ channelId: channelId });
+      setInviteLink(`${response.result.inviteLink}`);
+    } catch (error) {
+      console.error('초대 링크 생성 실패:', error);
+    }
   };
 
   const handleCopyLink = () => {

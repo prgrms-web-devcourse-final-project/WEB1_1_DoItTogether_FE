@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { Tabs, TabsList } from '@/components/common/ui/tabs';
 import TabItem from '@/components/common/tab/Tab/TabItem';
 
@@ -12,7 +12,7 @@ export interface TabProps {
   chargers: Charger[];
 }
 
-const Tab: React.FC<TabProps> = ({ activeTab, handleSetActiveTab, chargers }) => {
+const Tab = ({ activeTab, handleSetActiveTab, chargers }: TabProps) => {
   return (
     <Tabs defaultValue={activeTab} onValueChange={handleSetActiveTab} value={activeTab}>
       <TabsList className='h-15 flex w-full justify-start overflow-x-auto overflow-y-hidden rounded-none bg-white p-0 no-scrollbar'>
@@ -24,4 +24,4 @@ const Tab: React.FC<TabProps> = ({ activeTab, handleSetActiveTab, chargers }) =>
   );
 };
 
-export default Tab;
+export default memo(Tab);

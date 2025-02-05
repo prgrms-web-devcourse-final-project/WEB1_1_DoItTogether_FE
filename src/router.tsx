@@ -5,26 +5,25 @@ import StatisticsLayout from '@/layout/StatisticsLayout';
 
 import ErrorPage from '@/pages/ErrorPage';
 import LandingPage from '@/pages/LandingPage';
-import RegisterPage from '@/pages/RegisterPage';
-import SurveyIntroPage from '@/pages/SurveyIntroPage';
-import SurveyPage from '@/pages/SurveyPage';
-import GroupCreatePage from '@/pages/GroupCreatePage';
-import GroupSelectPage from '@/pages/GroupSelectPage';
-import GroupSettingPage from '@/pages/GroupSettingPage';
-import HomePage from '@/pages/HomePage';
-import WeeklyStatisticsPage from '@/pages/WeeklyStatisticsPage';
-import MonthlyStatisticsPage from '@/pages/MonthlyStatisticsPage';
-import PresetSettingPage from '@/pages/PresetSettingPage';
-import MyPage from '@/pages/MyPage';
-import MyPageEditPage from '@/pages/MyPageEditPage';
-import AccountManagePage from '@/pages/AccountManagePage';
-import LeavePage from '@/pages/LeavePage';
-import HouseWorkStepOnePage from '@/pages/HouseWorkStepOnePage';
-import HouseWorkStepTwoPage from '@/pages/HouseWorkStepTwoPage';
-import GroupInviteReceivePage from '@/pages/GroupInviteReceivePage';
+import RegisterPage from '@/pages/register/RegisterPage';
+import SurveyIntroPage from '@/pages/survey/SurveyIntroPage';
+import SurveyPage from '@/pages/survey/SurveyPage';
+import GroupCreatePage from '@/pages/group/GroupCreatePage';
+import GroupSelectPage from '@/pages/group/GroupSelectPage';
+import GroupSettingPage from '@/pages/group/GroupSettingPage';
+import HomePage from '@/pages/home/HomePage';
+import WeeklyStatisticsPage from '@/pages/statistics/WeeklyStatisticsPage';
+import MonthlyStatisticsPage from '@/pages/statistics/MonthlyStatisticsPage';
+import PresetSettingPage from '@/pages/group/PresetSettingPage';
+import MyPage from '@/pages/my/MyPage';
+import MyPageEditPage from '@/pages/my/MyPageEditPage';
+import AccountManagePage from '@/pages/my/AccountManagePage';
+import LeavePage from '@/pages/my/LeavePage';
+import GroupInviteReceivePage from '@/pages/group/GroupInviteReceivePage';
 import ScrollToTop from '@/components/common/scroll/ScrollToTop';
 import { Toaster } from '@/components/common/ui/toaster';
 import PrivateRouter from '@/components/PrivateRouter';
+import AddHouseworkPage from '@/pages/housework/AddHouseworkPage';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const RootLayout = () => {
@@ -178,34 +177,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/add-housework/:channelId/step1',
+        path: '/add-housework/:channelId',
         element: (
           <PrivateRouter>
-            <HouseWorkStepOnePage />
+            <AddHouseworkPage />
           </PrivateRouter>
         ),
       },
       {
-        path: '/add-housework/edit/:channelId/:houseworkId/step1/',
+        path: '/add-housework/edit/:channelId/:houseworkId',
         element: (
           <PrivateRouter>
-            <HouseWorkStepOnePage />
-          </PrivateRouter>
-        ),
-      },
-      {
-        path: '/add-housework/:channelId/step2',
-        element: (
-          <PrivateRouter>
-            <HouseWorkStepTwoPage />
-          </PrivateRouter>
-        ),
-      },
-      {
-        path: '/add-housework/edit/:channelId/:houseworkId/step2/',
-        element: (
-          <PrivateRouter>
-            <HouseWorkStepTwoPage />
+            <AddHouseworkPage />
           </PrivateRouter>
         ),
       },

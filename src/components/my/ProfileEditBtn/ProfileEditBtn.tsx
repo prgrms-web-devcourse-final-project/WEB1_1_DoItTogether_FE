@@ -1,13 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import React from 'react';
-
 interface ProfileEditBtnProps {
   imageUrl?: string;
   nickname?: string;
 }
 
-const ProfileEditBtn: React.FC<ProfileEditBtnProps> = ({ imageUrl, nickname }) => {
+const ProfileEditBtn = ({ imageUrl, nickname }: ProfileEditBtnProps) => {
   const navigate = useNavigate();
   const { channelId } = useParams();
 

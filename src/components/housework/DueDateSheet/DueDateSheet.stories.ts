@@ -16,5 +16,6 @@ export const Default: Story = {
   args: {
     isOpen: true,
     setOpen: action('setOpen'),
+    setStartDate: action('hello'),
   },
 };

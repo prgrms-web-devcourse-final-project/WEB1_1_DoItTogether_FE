@@ -1,52 +1,58 @@
-import { SelectedTime } from '@/pages/HouseWorkStepOnePage';
+import { Housework } from '@/types/apis/houseworkApi';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { User } from '@/types/apis/groupApi';
 
 interface AddHouseWorkState {
-  isAllday: boolean;
-  category: string;
-  task: string;
-  startDate: string;
-  startTime: SelectedTime | null;
   userId: number | null;
   selectedItem: number | null;
-  selectedDate: Date | undefined;
+  nickname: string;
+  targetHousework: Housework | undefined;
+  members: User[];
+  isMemberLoading: boolean;
 }
 
 interface AddHouseWorkActions {
-  setIsAllday: (value: boolean) => void;
-  setCategory: (category: string) => void;
-  setTask: (task: string) => void;
-  setStartDate: (date: string) => void;
-  setStartTime: (time: SelectedTime | null) => void;
   setUserId: (id: number | null) => void;
   setSelectedItem: (itemId: number | null) => void;
-  setSelectedDate: (date: Date | undefined) => void;
+  setNickName: (nickname: string) => void;
+  setTargetHousework: (targetHousework: Housework | undefined) => void;
+  setMembers: (members: User[]) => void;
+  setIsMemberLoading: (isMemberLoading: boolean) => void;
   reset: () => void;
 }
 
 const initialState: AddHouseWorkState = {
-  isAllday: true,
-  category: '',
-  task: '',
-  startDate: '',
-  startTime: null,
   userId: null,
   selectedItem: null,
-  selectedDate: undefined,
+  nickname: '',
+  targetHousework: undefined,
+  members: [],
+  isMemberLoading: true,
 };
 
-const useAddHouseWorkStore = create<AddHouseWorkState & AddHouseWorkActions>(set => ({
-  ...initialState,
+type State = AddHouseWorkState & AddHouseWorkActions;
+type PersistedState = Pick<AddHouseWorkState, 'targetHousework'>;
 
-  setIsAllday: isAllday => set({ isAllday }),
-  setCategory: category => set({ category }),
-  setTask: task => set({ task }),
-  setStartDate: startDate => set({ startDate }),
-  setStartTime: startTime => set({ startTime }),
-  setUserId: userId => set({ userId }),
-  setSelectedItem: selectedItem => set({ selectedItem }),
-  setSelectedDate: selectedDate => set({ selectedDate }),
-  reset: () => set(initialState),
-}));
+const useAddHouseWorkStore = create<State>()(
+  persist(
+    set => ({
+      ...initialState,
+      setUserId: userId => set({ userId }),
+      setSelectedItem: selectedItem => set({ selectedItem }),
+      setNickName: nickname => set({ nickname }),
+      setTargetHousework: targetHousework => set({ targetHousework }),
+      setMembers: members => set({ members }),
+      setIsMemberLoading: isMemberLoading => set({ isMemberLoading }),
+      reset: () => set(initialState),
+    }),
+    {
+      name: 'housework-storage',
+      partialize: (state): PersistedState => ({
+        targetHousework: state.targetHousework,
+      }),
+    }
+  )
+);
 
 export default useAddHouseWorkStore;

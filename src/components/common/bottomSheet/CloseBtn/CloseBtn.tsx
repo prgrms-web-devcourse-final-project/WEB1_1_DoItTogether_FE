@@ -6,7 +6,7 @@ interface CloseBtnProps {
   handleClick: () => void;
 }
 
-const CloseBtn: React.FC<CloseBtnProps> = ({ handleClick }) => {
+const CloseBtn = ({ handleClick }: CloseBtnProps) => {
   return (
     <button
       className='absolute right-1/2 top-[-70px] z-50 flex h-12 w-12 translate-x-1/2 rotate-45 items-center justify-center rounded-full bg-gray1/15 text-white'
@@ -17,4 +17,4 @@ const CloseBtn: React.FC<CloseBtnProps> = ({ handleClick }) => {
   );
 };
 
-export default CloseBtn;
+export default React.memo(CloseBtn);

@@ -8,7 +8,7 @@ interface MenuSelectProps {
   handleSelect: (content: string) => void;
 }
 
-const MenuSelect: React.FC<MenuSelectProps> = ({ type, status, content, handleSelect }) => {
+const MenuSelect = ({ type, status, content, handleSelect }: MenuSelectProps) => {
   return (
     <Button
       className={`max-w ${type === 'large' && 'justify-start'} ${status === 'active' && 'bg-main text-white'} whitespace-pre-line rounded-2xl text-left`}
@@ -21,4 +21,4 @@ const MenuSelect: React.FC<MenuSelectProps> = ({ type, status, content, handleSe
   );
 };
 
-export default MenuSelect;
+export default React.memo(MenuSelect);

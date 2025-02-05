@@ -19,12 +19,11 @@
     "body": [
       "import React from 'react'",
       "",
-
       "interface ${1:${TM_FILENAME_BASE}}Props {",
       "  $2",
       "};",
       "",
-      "const ${1:${TM_FILENAME_BASE}}: React.FC<${1:${TM_FILENAME_BASE}}Props> = ({ $2 } ) => {",
+      "const ${1:${TM_FILENAME_BASE}} = ({ $2 }: ${1:${TM_FILENAME_BASE}}Props) => {",
       "  return (",
       "    <div>",
       "      ${1:${TM_FILENAME_BASE}}",

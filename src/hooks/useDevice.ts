@@ -1,26 +1,20 @@
-// hooks/useDeviceHeight.ts
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDeviceStore } from '@/store/useDeviceStore';
 
 const useDevice = () => {
-  const [customHeightClass, setCustomHeightClass] = useState('');
+  const setDeviceType = useDeviceStore(state => state.setDeviceType);
 
   useEffect(() => {
-    const userAgent = navigator.userAgent;
+    const userAgent = navigator.userAgent.toLowerCase();
 
-    const isIPhone = /iPhone/.test(userAgent);
-    const isAndroid = /Android/.test(userAgent);
-    const isPC = !isIPhone && !isAndroid; // PC로 간주
-
-    if (isIPhone) {
-      setCustomHeightClass('h-[calc(100vh-100px)]'); // 아이폰일 경우
-    } else if (isAndroid) {
-      setCustomHeightClass('h-[calc(100vh-56px)]'); // 안드로이드일 경우
-    } else if (isPC) {
-      setCustomHeightClass('h-screen'); // PC일 경우
+    if (/iphone|ipad|ipod/.test(userAgent)) {
+      setDeviceType('ios');
+    } else if (/android/.test(userAgent)) {
+      setDeviceType('android');
+    } else {
+      setDeviceType('pc');
     }
-  }, []);
-
-  return customHeightClass;
+  }, [setDeviceType]);
 };
 
 export default useDevice;

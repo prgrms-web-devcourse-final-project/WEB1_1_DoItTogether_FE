@@ -1,9 +1,8 @@
 import { create } from 'zustand';
 import { Group } from '@/types/apis/groupApi';
-import getFormattedDate from '@/utils/getFormattedDate';
+import { getFormattedDate, getWeekText } from '@/utils/dateUtils';
 import { UserBase } from '@/types/apis/userApi';
 import { IncompleteScoreResponse } from '@/types/apis/houseworkApi';
-import getWeekText from '@/utils/getWeekText';
 
 interface WeeklyDates extends IncompleteScoreResponse {
   day: string;

@@ -52,4 +52,4 @@ const ManagerItem: React.FC<ManagerItemProps> = ({
   );
 };
 
-export default ManagerItem;
+export default React.memo(ManagerItem);

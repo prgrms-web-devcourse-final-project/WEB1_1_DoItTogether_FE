@@ -9,3 +9,4 @@ export {
   DUMMY_RESULT,
 } from '@/constants/onBoarding';
 export { WEEKLY_STAT_STEP } from '@/constants/weeklyStatStep';
+export { INPUT_VALIDATION } from '@/constants/validation';

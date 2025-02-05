@@ -6,14 +6,9 @@ export const getAllCategoryList = async (
   data: GetAllPresetListReq,
   params: GetPageParams = { page: 0, size: 20 }
 ) => {
-  try {
-    const response = await axiosInstance.get<GetAllPresetListRes>(
-      `/api/v1/channels/${data.channelId}/presets/categories/items`,
-      { params }
-    );
-    return response.data;
-  } catch (error) {
-    console.error('프리셋 전체 리스트 조회 실패:', error);
-    throw error;
-  }
+  const response = await axiosInstance.get<GetAllPresetListRes>(
+    `/api/v1/channels/${data.channelId}/presets/categories/items`,
+    { params }
+  );
+  return response.data;
 };

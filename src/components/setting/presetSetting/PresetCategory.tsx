@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 interface Category {
   presetCategoryId: number;
@@ -6,15 +6,11 @@ interface Category {
 }
 interface PresetCategoryProps {
   activeCate: string;
-  handleCateClick: (cate: string, categoryId: number) => void;
   categoryList: Category[];
+  handleCateClick: (cate: string, categoryId: number) => void;
 }
 
-const PresetCategory: React.FC<PresetCategoryProps> = ({
-  activeCate,
-  handleCateClick,
-  categoryList,
-}) => {
+const PresetCategory = ({ activeCate, handleCateClick, categoryList }: PresetCategoryProps) => {
   return (
     <div className='flex gap-1'>
       {categoryList.map(item => (
@@ -30,4 +26,4 @@ const PresetCategory: React.FC<PresetCategoryProps> = ({
   );
 };
 
-export default PresetCategory;
+export default memo(PresetCategory);

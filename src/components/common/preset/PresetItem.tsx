@@ -2,29 +2,29 @@ import { BinIcon } from '@/components/common/icon';
 import HouseworkCategoryTag, {
   HouseworkCategoryTagProps,
 } from '@/components/common/tag/HouseworkCatetoryTag/HouseworkCategoryTag';
-import React from 'react';
+import { memo } from 'react';
 
 export interface PresetItemProps extends HouseworkCategoryTagProps {
   housework: string;
-  handleSelectClick?: () => void;
   isPresetSettingCustom?: boolean;
   isShowDeleteBtn?: boolean;
-  handleSettingClick?: () => void;
-  handleDeleteClick?: () => void;
   isSelected?: boolean;
   isBottomSheet?: boolean;
+  handleSelectClick?: () => void;
+  handleSettingClick?: () => void;
+  handleDeleteClick?: () => void;
 }
 
-const PresetItem: React.FC<PresetItemProps> = ({
+const PresetItem = ({
   category,
   housework,
-  handleSelectClick,
   isPresetSettingCustom,
   isShowDeleteBtn,
-  handleDeleteClick,
   isSelected,
   isBottomSheet,
-}) => {
+  handleSelectClick,
+  handleDeleteClick,
+}: PresetItemProps) => {
   return (
     <li
       className={`flex flex-1 cursor-pointer list-none items-center justify-between border-b-[1px] border-solid border-white pl-5 ${
@@ -52,4 +52,4 @@ const PresetItem: React.FC<PresetItemProps> = ({
   );
 };
 
-export default PresetItem;
+export default memo(PresetItem);

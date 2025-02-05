@@ -1,5 +1,6 @@
 import { CheckIcon } from '@/components/common/icon';
 import { Button } from '@/components/common/ui/button';
+import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
 import { User } from '@/types/apis/groupApi';
 
 interface OpenSheetBtnWithLabelProps {
@@ -17,9 +18,11 @@ const OpenSheetBtnWithLabel: React.FC<OpenSheetBtnWithLabelProps> = ({
   members,
   icon,
 }: OpenSheetBtnWithLabelProps) => {
+  const { nickname } = useAddHouseWorkStore();
+
   const displayValue =
     members && typeof selected === 'number'
-      ? members.find(member => member.userId === selected)?.nickName || selected
+      ? members.find(member => member.userId === selected)?.nickName || nickname
       : selected;
 
   return (

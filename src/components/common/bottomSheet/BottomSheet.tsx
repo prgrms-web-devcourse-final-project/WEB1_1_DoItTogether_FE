@@ -1,7 +1,9 @@
 import { Sheet } from 'react-modal-sheet';
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import BottomSheetTitle from '@/components/common/bottomSheet/BottomSheetTitle/BottomSheetTitle';
 import CloseBtn from '@/components/common/bottomSheet/CloseBtn/CloseBtn';
+import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 interface BottomSheetProps {
   /** 바텀시트 오픈 여부 */
@@ -14,6 +16,8 @@ interface BottomSheetProps {
   closeBtn?: boolean;
   /**바텀시트 컨텐츠 */
   children: React.ReactNode;
+  selectedDate?: Date | undefined;
+  setSelectedDate?: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
@@ -22,7 +26,35 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   title,
   closeBtn = true,
   children,
+  setSelectedDate,
+  selectedDate,
 }) => {
+  const { targetHousework } = useAddHouseWorkStore();
+
+  const handleClick = useCallback(() => {
+    if (selectedDate) {
+      setSelectedDate?.(undefined);
+    }
+    if (targetHousework?.startDate) {
+      const date = new Date(targetHousework.startDate);
+      setSelectedDate?.(date);
+    }
+    setOpen(false);
+  }, [selectedDate, targetHousework?.startDate]);
+
+  const memoizedTitle = useMemo(() => title, [title]);
+
+  const SheetHeader = useMemo(
+    () => (
+      <Sheet.Header>
+        <BottomSheetTitle title={memoizedTitle} />
+      </Sheet.Header>
+    ),
+    [memoizedTitle]
+  );
+
+  const paddingClass = useDevicePadding();
+
   return (
     <>
       <Sheet
@@ -32,11 +64,9 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         disableDrag={true}
       >
         <div className='relative mx-auto h-full w-full max-w'>
-          <Sheet.Container>
-            {closeBtn && <CloseBtn handleClick={() => setOpen(false)} />}
-            <Sheet.Header>
-              <BottomSheetTitle title={title} />
-            </Sheet.Header>
+          <Sheet.Container className={`${paddingClass}`}>
+            {closeBtn && <CloseBtn handleClick={handleClick} />}
+            {SheetHeader}
             <Sheet.Content>{children}</Sheet.Content>
           </Sheet.Container>
         </div>
