@@ -9,6 +9,7 @@ export const useMy = () => {
     email: '',
     socialId: '',
     profileImageUrl: '',
+    provider: '',
   });
   const [isLoading, setIsLoading] = useState(true);
 

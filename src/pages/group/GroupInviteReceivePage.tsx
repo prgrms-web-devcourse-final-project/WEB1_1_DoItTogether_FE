@@ -2,10 +2,13 @@ import Button from '@/components/common/button/Button/Button';
 import Header from '@/components/common/header/Header';
 import InputBox from '@/components/common/input/InputBox';
 import MetaTags from '@/components/common/metaTags/MetaTags';
+import useDevicePadding from '@/hooks/useDevicePadding';
 import { useGroupInvite } from '@/hooks/useGroupInvite';
 
 const GroupInviteReceivePage = () => {
   const { inviteLink, setInviteLink, handleBack, handleGoIn } = useGroupInvite();
+
+  const paddingClass = useDevicePadding();
 
   return (
     <div className={`flex h-screen flex-col`}>
@@ -23,7 +26,7 @@ const GroupInviteReceivePage = () => {
           handleChange={setInviteLink}
         />
       </div>
-      <div className='sticky bottom-6 px-5'>
+      <div className={`sticky bottom-6 ${paddingClass} px-5`}>
         <Button
           label='입장하기'
           size='large'

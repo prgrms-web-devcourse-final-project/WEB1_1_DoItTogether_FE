@@ -1,13 +1,18 @@
 import SurveyTitle from '@/components/survey/SurveyTitle/SurveyTitle';
 import TextTag from '@/components/common/tag/TextTag/TextTag';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/common/ui/button';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 interface Step5Props {
   title: string;
   results: string[];
+  handleDone: () => void;
 }
 
-const Step5: React.FC<Step5Props> = ({ title, results }) => {
+const Step5: React.FC<Step5Props> = ({ title, results, handleDone }) => {
+  const paddingClass = useDevicePadding();
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -41,27 +46,34 @@ const Step5: React.FC<Step5Props> = ({ title, results }) => {
   };
 
   return (
-    <motion.div
-      className='flex flex-1 flex-col gap-3'
-      variants={container}
-      initial='hidden'
-      animate='show'
-    >
-      <motion.div className='mb-5' variants={titleItem}>
-        <SurveyTitle title={title} />
-      </motion.div>
+    <>
+      <motion.div
+        className='flex flex-1 flex-col gap-3 px-5'
+        variants={container}
+        initial='hidden'
+        animate='show'
+      >
+        <motion.div className='mb-5 pt-28' variants={titleItem}>
+          <SurveyTitle title={title} />
+        </motion.div>
 
-      <motion.div className='flex flex-wrap gap-3' variants={item}>
-        {results.map(result => (
-          <TextTag
-            key={result}
-            type='secondary'
-            label={`# ${result}`}
-            className='font-body border-main/50 rounded-2xl border-2 px-4 py-3'
-          />
-        ))}
+        <motion.div className='flex flex-wrap gap-3' variants={item}>
+          {results.map(result => (
+            <TextTag
+              key={result}
+              type='secondary'
+              label={`# ${result}`}
+              className='rounded-2xl border-2 border-main/50 px-4 py-3 font-body'
+            />
+          ))}
+        </motion.div>
       </motion.div>
-    </motion.div>
+      <motion.div className={`sticky bottom-6 ${paddingClass} bg-white px-5`}>
+        <Button size={'large'} onClick={handleDone}>
+          완료
+        </Button>
+      </motion.div>
+    </>
   );
 };
 

@@ -167,3 +167,12 @@ body:has(.react-modal-sheet-container) {
   transform: translateX(-100%);
   transition: all 300ms ease-in-out;
 } */
+
+@layer utilities {
+  .pb-ios {
+    padding-bottom: 1.625rem;
+  }
+  .pb-android {
+    padding-bottom: 1.5rem;
+  }
+}

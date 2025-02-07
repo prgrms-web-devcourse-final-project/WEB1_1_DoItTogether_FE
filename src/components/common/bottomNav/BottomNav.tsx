@@ -3,6 +3,7 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import AddHouseWorkBtn from './AddHouseWorkBtn/AddHouseWorkBtn';
 import BottomNavBtn from './BottomNavBtn/BottomNavBtn';
 import { ChartIcon, GroupIcon, HomeIcon, ProfileIcon } from '@/components/common/icon';
+import useDevicePadding from '@/hooks/useDevicePadding';
 
 const BottomNav: React.FC = () => {
   const navigate = useNavigate();
@@ -55,8 +56,12 @@ const BottomNav: React.FC = () => {
     [currentPath, channelId]
   );
 
+  const paddingClass = useDevicePadding();
+
   return (
-    <div className='flex w-full max-w justify-between rounded-tl-4xl rounded-tr-4xl bg-white px-5 py-2'>
+    <div
+      className={`${paddingClass} flex w-full max-w justify-between rounded-tl-4xl rounded-tr-4xl bg-white px-5 py-2`}
+    >
       {navItems.slice(0, 2).map(item => (
         <div key={item.name} className='flex flex-1 justify-center'>
           <BottomNavBtn
