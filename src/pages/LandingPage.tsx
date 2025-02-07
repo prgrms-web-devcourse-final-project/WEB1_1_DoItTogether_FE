@@ -33,7 +33,7 @@ const LandingPage = () => {
         initial='hidden'
         animate='show'
       >
-        <div className='flex flex-col'>
+        <div className='flex h-full flex-col justify-between'>
           <ServiceTitle />
           <Suspense fallback={<div></div>}>
             <ServiceLogo />
