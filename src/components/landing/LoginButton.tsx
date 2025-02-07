@@ -5,10 +5,9 @@ import { GoogleIcon, KakaoIcon, NaverIcon } from '@/components/common/icon';
 interface LoginButtonProps {
   handleLoginButton: () => void;
   provider: 'kakao' | 'google' | 'naver';
-  label?: string;
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({ handleLoginButton, provider, label }) => {
+const LoginButton: React.FC<LoginButtonProps> = ({ handleLoginButton, provider }) => {
   const item = {
     hidden: { opacity: 0, y: 0 },
     show: {
@@ -30,9 +29,9 @@ const LoginButton: React.FC<LoginButtonProps> = ({ handleLoginButton, provider, 
   return (
     <motion.section variants={item} aria-label={`${provider} 로그인 버튼`}>
       <Button
-        label={label}
+        label={''}
         variant={provider}
-        size='large'
+        size='round'
         handleClick={handleLoginButton}
         icon={PROVIDER_ICONS[provider]}
       />
