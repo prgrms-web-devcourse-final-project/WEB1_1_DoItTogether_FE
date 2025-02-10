@@ -16,7 +16,7 @@ interface ButtonProps {
     | 'group'
     | 'onboarding';
   /** 사이즈 */
-  size: 'small' | 'large';
+  size: 'small' | 'large' | 'round';
   /** 클릭 이벤트 */
   handleClick?: () => void;
   /** 커스텀 스타일 */
@@ -44,8 +44,14 @@ const Button = ({
     >
       {icon ? (
         <div className='flex w-full items-center'>
-          <span className='ml-5'>{icon}</span>
-          <span className='flex-1 text-center'>{label}</span>
+          {label !== '' ? (
+            <>
+              <span className='ml-5'>{icon}</span>
+              <span className='flex-1 text-center'>{label}</span>
+            </>
+          ) : (
+            <span className='flex flex-1 justify-center'>{icon}</span>
+          )}
         </div>
       ) : (
         label

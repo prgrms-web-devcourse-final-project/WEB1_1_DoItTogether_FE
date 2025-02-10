@@ -21,6 +21,7 @@ export const Default: Story = {
     pendingCnt: 1,
     solvedMatters: true,
     isActive: true,
+    isToday: false,
     handleClick: action('DateItem clicked'),
   },
 };

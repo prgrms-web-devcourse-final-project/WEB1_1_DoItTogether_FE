@@ -93,6 +93,7 @@ const WeeklyDate = () => {
   };
 
   const memoizedCurrWeek = useMemo(() => currWeek, [currWeek]);
+  const today = getFormattedDate(new Date());
 
   return (
     <Carousel opts={{ loop: true }} setApi={setApi}>
@@ -109,6 +110,7 @@ const WeeklyDate = () => {
                     pendingCnt={week.houseworkIncompleteCount}
                     solvedMatters={week.solvedMatters}
                     isActive={activeDate === week.date && current === i}
+                    isToday={today === week.date && current === i}
                     handleClick={() => handleActiveDate(week.date)}
                   />
                 ))}
