@@ -23,14 +23,14 @@ export const useLanding = () => {
       }
     };
 
-    checkInitialState();
-  }, [navigate]);
-
-  const handleLogin = (provider: 'kakao' | 'google' | 'naver') => {
     if (sessionStorage.getItem('access_token')) {
       navigate('/group-select');
       return;
     }
+    checkInitialState();
+  }, [navigate]);
+
+  const handleLogin = (provider: 'kakao' | 'google' | 'naver') => {
     window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/${provider}`;
   };
 
