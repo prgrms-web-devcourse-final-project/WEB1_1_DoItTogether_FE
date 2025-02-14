@@ -31,7 +31,11 @@ export const useLanding = () => {
   }, [navigate]);
 
   const handleLogin = (provider: 'kakao' | 'google' | 'naver') => {
-    window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/${provider}`;
+    window.location.href = `${
+      import.meta.env.MODE === 'production'
+        ? import.meta.env.VITE_PROD_SERVER_URL
+        : import.meta.env.VITE_DEV_SERVER_URL
+    }/oauth2/authorization/${provider}`;
   };
 
   const initNotification = async () => {
