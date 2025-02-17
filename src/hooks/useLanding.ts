@@ -41,20 +41,13 @@ export const useLanding = () => {
   const initNotification = async () => {
     const notificationResult = await setupPushNotifications();
     if (notificationResult) {
-      const FCM_TOKEN = 'fcm_token';
       const { token, platformType } = notificationResult;
-      console.log(token, platformType);
-      const storedToken = sessionStorage.getItem(FCM_TOKEN);
-      if (!storedToken || storedToken !== token) {
-        try {
-          await postFcmToken({ token, platformType });
-          sessionStorage.setItem(FCM_TOKEN, token);
-        } catch (error) {
-          console.error('Error posting FCM token:', error);
-        }
+      try {
+        await postFcmToken({ token, platformType });
+      } catch (error) {
+        console.error('Error posting FCM token:', error);
       }
     }
   };
-
   return { handleLogin };
 };
