@@ -2,11 +2,9 @@ import { motion } from 'framer-motion';
 import { ServiceTitle, LoginButton, ServiceLogo } from '@/components/landing';
 import { useLanding } from '@/hooks/useLanding';
 import MetaTags from '@/components/common/metaTags/MetaTags';
-import useDevicePadding from '@/hooks/useDevicePadding';
 
 const LandingPage = () => {
   const { handleLogin } = useLanding();
-  const paddingClass = useDevicePadding();
 
   const container = {
     hidden: { opacity: 0 },
@@ -32,26 +30,10 @@ const LandingPage = () => {
         initial='hidden'
         animate='show'
       >
-        <div className='flex flex-1 flex-col'>
+        <div className='flex h-full flex-col justify-between'>
           <ServiceTitle />
           <ServiceLogo />
-        </div>
-        <div className={`sticky bottom-6 ${paddingClass} flex flex-col gap-4`}>
-          <LoginButton
-            provider='kakao'
-            handleLoginButton={() => handleLogin('kakao')}
-            label='카카오로 3초 만에 시작하기'
-          />
-          <LoginButton
-            provider='naver'
-            handleLoginButton={() => handleLogin('naver')}
-            label='네이버로 시작하기'
-          />
-          <LoginButton
-            provider='google'
-            handleLoginButton={() => handleLogin('google')}
-            label='Google로 시작하기'
-          />
+          <LoginButtons handleLogin={handleLogin} />
         </div>
       </motion.div>
     </>
