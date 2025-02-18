@@ -1,4 +1,3 @@
-import React, { Suspense } from 'react';
 import SettingHeaderContainer from '@/components/common/header/Header';
 import InputWithLabel from '@/components/common/input/InputWithLabel';
 import InviteLinkWithLabel from '@/components/setting/groupSetting/InviteLink/InviteLinkWithLabel';
@@ -9,10 +8,7 @@ import PresetSettingBtn from '@/components/setting/groupSetting/PresetSettingBtn
 import ErrorMessage from '@/components/common/errorMessage/ErrorMessage';
 import MetaTags from '@/components/common/metaTags/MetaTags';
 import { useParams } from 'react-router-dom';
-
-const MemberItems = React.lazy(
-  () => import('@/components/setting/groupSetting/MemberItems/MemberItems')
-);
+import MemberItems from '@/components/setting/groupSetting/MemberItems/MemberItems';
 
 const GroupSettingPage = () => {
   const {
@@ -24,7 +20,6 @@ const GroupSettingPage = () => {
     currentUser,
     members,
     selectedMember,
-    isLoading,
     error,
     isAdmin,
     handleMovePreset,
@@ -36,10 +31,6 @@ const GroupSettingPage = () => {
     setIsOpen,
   } = useGroupSetting();
   const { channelId } = useParams();
-
-  if (isLoading) {
-    return <div></div>;
-  }
 
   return (
     <>
@@ -66,14 +57,12 @@ const GroupSettingPage = () => {
           {error && <ErrorMessage message={INPUT_VALIDATION.roomName.errorMessage} />}
         </div>
 
-        <Suspense fallback={<div></div>}>
-          <MemberItems
-            leader={isAdmin}
-            members={members}
-            currentUser={currentUser}
-            handleClick={handleSheet}
-          />
-        </Suspense>
+        <MemberItems
+          leader={isAdmin}
+          members={members}
+          currentUser={currentUser}
+          handleClick={handleSheet}
+        />
 
         <InviteLinkWithLabel />
         <PresetSettingBtn handleClick={handleMovePreset} />
