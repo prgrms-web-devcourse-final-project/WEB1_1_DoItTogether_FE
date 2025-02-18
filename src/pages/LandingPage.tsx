@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ServiceTitle, LoginButton, ServiceLogo } from '@/components/landing';
+import { ServiceTitle, LoginButtons, ServiceLogo } from '@/components/landing';
 import { useLanding } from '@/hooks/useLanding';
 import MetaTags from '@/components/common/metaTags/MetaTags';
 
