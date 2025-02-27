@@ -11,14 +11,17 @@ const LandingPage = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.7,
+        staggerChildren: 0.4,
       },
     },
   };
 
   const item = {
     hidden: { opacity: 0 },
-    show: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: { duration: 0.4 },
+    },
   };
 
   return (
@@ -50,9 +53,13 @@ const LandingPage = () => {
             </div>
           </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.0, duration: 0.5 }}
+          >
             <LoginButtons handleLogin={handleLogin} />
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
