@@ -8,6 +8,7 @@ export const postHousework = async ({
   task,
   startTime,
   userId,
+  status,
 }: AddHouseworkReq) => {
   const response = await axiosInstance.post<AddHouseworkRes>(
     `api/v1/channels/${channelId}/houseworks`,
@@ -17,6 +18,7 @@ export const postHousework = async ({
       startDate,
       startTime,
       userId,
+      status,
     }
   );
   return response.data;

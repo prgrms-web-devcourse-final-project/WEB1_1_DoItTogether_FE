@@ -9,10 +9,11 @@ export const putHousework = async ({
   startDate,
   startTime,
   userId,
+  status,
 }: PutHouseworkReq) => {
   const response = await axiosInstance.put<PutHouseworkRes>(
     `api/v1/channels/${channelId}/houseworks/${houseworkId}`,
-    { category, task, startDate, startTime, userId }
+    { category, task, startDate, startTime, userId, status }
   );
   return response.data;
 };
