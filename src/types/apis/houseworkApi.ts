@@ -29,7 +29,9 @@ interface HouseworkCommonReq
     Pick<Housework, 'category' | 'task' | 'startDate' | 'startTime' | 'userId'> {}
 
 // 집안일 추가
-export interface AddHouseworkReq extends HouseworkCommonReq {}
+export interface AddHouseworkReq extends HouseworkCommonReq {
+  status: string;
+}
 
 export interface AddHouseworkRes extends BaseRes {
   result: {};
@@ -45,7 +47,9 @@ export interface GetHouseworkByIdRes extends BaseRes {
 }
 
 // 집안일 수정
-export interface PutHouseworkReq extends HouseworkCommonReq, Pick<Housework, 'houseworkId'> {}
+export interface PutHouseworkReq extends HouseworkCommonReq, Pick<Housework, 'houseworkId'> {
+  status: string;
+}
 
 export interface PutHouseworkRes extends BaseRes {
   result: {};

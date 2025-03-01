@@ -32,6 +32,7 @@ const useAddHouseWork = () => {
     members,
     setMembers,
     setIsMemberLoading,
+    status,
   } = useAddHouseWorkStore();
 
   const { setActiveDate, setActiveWeek, setActiveTab, setWeekText } = useHomePageStore();
@@ -121,6 +122,7 @@ const useAddHouseWork = () => {
               task,
               startTime: newTime,
               userId,
+              status,
             });
           } else {
             await postHousework({
@@ -130,6 +132,7 @@ const useAddHouseWork = () => {
               task,
               startTime: newTime,
               userId,
+              status,
             });
           }
 
