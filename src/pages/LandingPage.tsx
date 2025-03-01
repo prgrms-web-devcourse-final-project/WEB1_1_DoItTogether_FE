@@ -11,8 +11,16 @@ const LandingPage = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.7,
+        staggerChildren: 0.4,
       },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { duration: 0.4 },
     },
   };
 
@@ -24,18 +32,36 @@ const LandingPage = () => {
         url={'https://doit-together.vercel.app/'}
       />
 
-      <motion.div
-        className={`mx-auto flex h-screen flex-col gap-10 px-5 text-center`}
-        variants={container}
-        initial='hidden'
-        animate='show'
-      >
-        <div className='flex h-full flex-col justify-between'>
-          <ServiceTitle />
-          <ServiceLogo />
-          <LoginButtons handleLogin={handleLogin} />
+      <div className={`mx-auto flex h-screen flex-col px-5 text-center`}>
+        <div className='flex h-full flex-col'>
+          <motion.div
+            variants={container}
+            initial='hidden'
+            animate='show'
+            className='flex h-full flex-col'
+          >
+            <div>
+              <motion.div variants={item}>
+                <ServiceTitle />
+              </motion.div>
+            </div>
+
+            <div className='flex flex-grow items-center justify-center'>
+              <motion.div variants={item}>
+                <ServiceLogo />
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.0, duration: 0.5 }}
+          >
+            <LoginButtons handleLogin={handleLogin} />
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };
