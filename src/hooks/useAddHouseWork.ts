@@ -174,12 +174,6 @@ const useAddHouseWork = () => {
     setIsOpen(true);
   };
 
-  //담당자 선택 완료하면 시트 닫힘
-  const handleDoneClick = () => {
-    setIsOpen(false);
-    setUserId(selectedValue);
-  };
-
   return {
     startDate,
     userId,
@@ -193,7 +187,6 @@ const useAddHouseWork = () => {
     setIsOpen,
     setSelectedValue,
     selectedValue,
-    handleDoneClick,
     channelId,
     houseworkId,
     handleBackClick,
