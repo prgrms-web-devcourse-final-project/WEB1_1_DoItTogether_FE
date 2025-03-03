@@ -124,3 +124,28 @@ export interface GetWeeklyIncompleteRes extends BaseRes {
     incompleteScoreResponses: Array<IncompleteScoreResponse>;
   };
 }
+
+//담당자 AI 조회
+
+export interface PostAssignHouseworkAIReq extends Pick<Common, 'channelId'> {
+  houseworkName: string;
+}
+
+export interface PostAssignHouseworkAIRes extends BaseRes {
+  result: {
+    userId: number;
+    houseworkName: string;
+    status: string;
+  };
+}
+
+//타겟 유저의 성향 조회
+export interface GetTargetUserIdReq {
+  targetUserId: number;
+}
+
+export interface GetTargetUserIdRes extends BaseRes {
+  result: {
+    keywords: string[];
+  };
+}

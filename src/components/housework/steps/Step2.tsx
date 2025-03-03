@@ -6,7 +6,11 @@ const ManagerSelectSheet = lazy(
   () => import('@/components/housework/ManagerSelectSheet/ManagerSelectSheet')
 );
 
-const Step2 = () => {
+interface Step2Props {
+  task: string;
+}
+
+const Step2 = ({ task }: Step2Props) => {
   const {
     userId,
     members,
@@ -15,7 +19,6 @@ const Step2 = () => {
     setIsOpen,
     setSelectedValue,
     selectedValue,
-    handleDoneClick,
   } = useAddHouseWork();
 
   return (
@@ -31,8 +34,8 @@ const Step2 = () => {
           setIsOpen={setIsOpen}
           setSelectedValue={setSelectedValue}
           selectedValue={selectedValue}
-          handleDoneClick={handleDoneClick}
           members={members}
+          task={task}
         />
       </Suspense>
     </>

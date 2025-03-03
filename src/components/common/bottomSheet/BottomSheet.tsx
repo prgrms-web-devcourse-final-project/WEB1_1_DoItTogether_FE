@@ -18,6 +18,8 @@ interface BottomSheetProps {
   children: React.ReactNode;
   selectedDate?: Date | undefined;
   setSelectedDate?: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  setSelectedValue?: React.Dispatch<React.SetStateAction<number | null>>;
+  setIsAiCardOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
@@ -28,8 +30,10 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   children,
   setSelectedDate,
   selectedDate,
+  setSelectedValue,
+  setIsAiCardOpen,
 }) => {
-  const { targetHousework } = useAddHouseWorkStore();
+  const { targetHousework, userId } = useAddHouseWorkStore();
 
   const handleClick = useCallback(() => {
     if (selectedDate) {
@@ -39,8 +43,12 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
       const date = new Date(targetHousework.startDate);
       setSelectedDate?.(date);
     }
+    if (userId) {
+      setSelectedValue?.(userId);
+    }
+    setIsAiCardOpen?.(false);
     setOpen(false);
-  }, [selectedDate, targetHousework?.startDate]);
+  }, [selectedDate, targetHousework?.startDate, userId]);
 
   const memoizedTitle = useMemo(() => title, [title]);
 

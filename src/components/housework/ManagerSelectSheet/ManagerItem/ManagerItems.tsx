@@ -4,29 +4,41 @@ import { User } from '@/types/apis/groupApi';
 import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
 
 interface ManagerItemsProps {
-  // isAiCardOpen: boolean;
   setSelectedValue: Dispatch<SetStateAction<number | null>>;
   selectedValue: number | null;
   members: User[];
+  isAiCardOpen: boolean;
+  setIsAiCardOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const ManagerItems: React.FC<ManagerItemsProps> = ({
-  // isAiCardOpen,
   setSelectedValue,
   selectedValue,
   members,
+  isAiCardOpen,
+  setIsAiCardOpen,
 }) => {
-  const { setNickName } = useAddHouseWorkStore();
+  const { setNickName, setStatus } = useAddHouseWorkStore();
 
   const createHandleClick = useCallback(
     (id: number, nickname: string) => () => {
       if (selectedValue === id) {
         setSelectedValue(null);
         setNickName('');
+
+        if (isAiCardOpen) {
+          setIsAiCardOpen(false);
+        }
       } else {
         setSelectedValue(id);
         setNickName(nickname);
+
+        if (isAiCardOpen) {
+          setIsAiCardOpen(false);
+        }
       }
+
+      setStatus('SELECT');
     },
     [selectedValue, setSelectedValue, setNickName]
   );
