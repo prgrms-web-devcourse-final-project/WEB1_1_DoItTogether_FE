@@ -33,6 +33,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   setSelectedValue,
   setIsAiCardOpen,
 }) => {
+  //전역변수 사용
   const { targetHousework, userId } = useAddHouseWorkStore();
 
   const handleClick = useCallback(() => {
