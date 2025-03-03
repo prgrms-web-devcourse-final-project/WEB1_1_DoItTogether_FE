@@ -40,7 +40,7 @@ const ManagerItems: React.FC<ManagerItemsProps> = ({
 
       setStatus('SELECT');
     },
-    [selectedValue, setSelectedValue, setNickName]
+    [selectedValue, setSelectedValue, setNickName, isAiCardOpen, setIsAiCardOpen, setStatus]
   );
 
   return (
