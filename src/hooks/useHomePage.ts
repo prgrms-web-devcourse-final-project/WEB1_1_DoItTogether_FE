@@ -17,10 +17,10 @@ import { getMyInfo } from '@/services/user/getMyInfo';
 import { getWeeklyIncomplete } from '@/services/housework/getWeeklyIncomplete';
 import { postCompliment } from '@/services/noticeManage/postCompliment';
 import { postPoke } from '@/services/noticeManage/postPoke';
-import { postFcmToken } from '@/services/fcm/postFcmToken';
 import useAddHouseWorkStore from '@/store/useAddHouseWorkStore';
 
-import { setupPushNotifications } from '@/utils/fcm';
+import { Housework } from '@/types/apis/houseworkApi';
+import { UserBase } from '@/types/apis/userApi';
 
 export const useHomePage = () => {
   const {
@@ -108,26 +108,6 @@ export const useHomePage = () => {
     fetchGroupUsers();
   }, [channelId]);
 
-  useEffect(() => {
-    const initNotification = async () => {
-      const notificationResult = await setupPushNotifications();
-      if (notificationResult) {
-        const FCM_TOKEN = 'fcm_token';
-        const { token, platformType } = notificationResult;
-        const storedToken = sessionStorage.getItem(FCM_TOKEN);
-        if (!storedToken || storedToken !== token) {
-          try {
-            await postFcmToken({ token, platformType });
-            sessionStorage.setItem(FCM_TOKEN, token);
-          } catch (error) {
-            console.error('Error posting FCM token:', error);
-          }
-        }
-      }
-    };
-    initNotification();
-  }, []);
-
   const updateWeeklyIncomplete = useCallback(async () => {
     try {
       const currWeekResult = await getWeeklyIncomplete({
@@ -157,53 +137,62 @@ export const useHomePage = () => {
     async (houseworkId: number) => {
       const targetHousework = houseworks?.find(housework => housework.houseworkId === houseworkId);
 
-      if (!targetHousework) return;
+      if (!targetHousework || !myInfo) return;
 
-      const isMyHousework = targetHousework.userId === myInfo?.userId;
+      const isMyHousework = targetHousework.userId === myInfo.userId;
       const isComplete = targetHousework.status === HOUSEWORK_STATUS.COMPLETE;
 
-      if (isMyHousework) {
-        try {
-          await changeHouseworkStatus({ channelId, houseworkId });
-          refetch();
-          await updateWeeklyIncomplete();
-        } catch (error) {
-          console.error('집안일 상태 변경 실패:', error);
+      try {
+        if (isMyHousework) {
+          await handleStatusChange(targetHousework);
+        } else if (isComplete) {
+          await handleCompliment(targetHousework, myInfo);
+        } else {
+          await handlePoke(targetHousework, myInfo);
         }
-      } else if (isComplete) {
-        try {
-          await postCompliment({
-            channelId,
-            targetUserId: targetHousework.userId,
-            reactDate: targetHousework.startDate,
-            notificationRequest: {
-              title: `${myInfo?.nickName}님이 당신을 칭찬했습니다.`,
-              content: `${targetHousework.task}을(를) 완벽히 수행하셨군요.`,
-            },
-          });
-          toast({ title: `${targetHousework.assignee}님을 칭찬했어요` });
-        } catch (error) {
-          console.error('칭찬하기 실패:', error);
-        }
-      } else {
-        try {
-          await postPoke({
-            channelId,
-            targetUserId: targetHousework.userId!,
-            reactDate: targetHousework.startDate!,
-            notificationRequest: {
-              title: `${myInfo?.nickName}님이 당신을 찔렀습니다.`,
-              content: `${targetHousework.task}을(를) 완료해주세요.`,
-            },
-          });
-          toast({ title: `${targetHousework.assignee}님을 찔렀어요` });
-        } catch (error) {
-          console.error('찌르기 실패:', error);
-        }
+      } catch (error) {
+        handleError(error);
       }
     },
     [channelId, houseworks, myInfo, refetch, updateWeeklyIncomplete, toast]
   );
+
+  const handleStatusChange = async (housework: Housework) => {
+    await changeHouseworkStatus({ channelId, houseworkId: housework.houseworkId });
+    refetch();
+    await updateWeeklyIncomplete();
+  };
+
+  const handleCompliment = async (housework: Housework, myInfo: UserBase) => {
+    await postCompliment({
+      channelId,
+      targetUserId: housework.userId,
+      reactDate: housework.startDate,
+      notificationRequest: {
+        title: `${myInfo.nickName}님이 당신을 칭찬했습니다.`,
+        content: `${housework.task}을(를) 완벽히 수행하셨군요.`,
+      },
+    });
+    toast({ title: `${housework.assignee}님을 칭찬했어요.` });
+  };
+
+  const handlePoke = async (housework: Housework, myInfo: UserBase) => {
+    await postPoke({
+      channelId,
+      targetUserId: housework.userId,
+      reactDate: housework.startDate,
+      notificationRequest: {
+        title: `${myInfo.nickName}님이 당신을 찔렀습니다.`,
+        content: `${housework.task}을(를) 완료해주세요.`,
+      },
+    });
+    toast({ title: `${housework.assignee}님을 찔렀어요` });
+  };
+
+  const handleError = (error: unknown) => {
+    console.error('작업 실패:', error);
+    toast({ title: `오류가 발생했어요.` });
+  };
 
   const handleEdit = useCallback(
     (houseworkId: number) => {

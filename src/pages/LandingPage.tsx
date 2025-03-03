@@ -1,23 +1,26 @@
-import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ServiceTitle, LoginButton } from '@/components/landing';
+import { ServiceTitle, LoginButtons, ServiceLogo } from '@/components/landing';
 import { useLanding } from '@/hooks/useLanding';
 import MetaTags from '@/components/common/metaTags/MetaTags';
-import useDevicePadding from '@/hooks/useDevicePadding';
-
-const ServiceLogo = lazy(() => import('@/components/landing/ServiceLogo'));
 
 const LandingPage = () => {
   const { handleLogin } = useLanding();
-  const paddingClass = useDevicePadding();
 
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.7,
+        staggerChildren: 0.4,
       },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { duration: 0.4 },
     },
   };
 
@@ -29,36 +32,36 @@ const LandingPage = () => {
         url={'https://doit-together.vercel.app/'}
       />
 
-      <motion.div
-        className={`mx-auto flex h-screen flex-col gap-10 px-5 text-center`}
-        variants={container}
-        initial='hidden'
-        animate='show'
-      >
-        <div className='flex flex-1 flex-col'>
-          <ServiceTitle />
-          <Suspense fallback={<div></div>}>
-            <ServiceLogo />
-          </Suspense>
+      <div className={`mx-auto flex h-screen flex-col px-5 text-center`}>
+        <div className='flex h-full flex-col'>
+          <motion.div
+            variants={container}
+            initial='hidden'
+            animate='show'
+            className='flex h-full flex-col'
+          >
+            <div>
+              <motion.div variants={item}>
+                <ServiceTitle />
+              </motion.div>
+            </div>
+
+            <div className='flex flex-grow items-center justify-center'>
+              <motion.div variants={item}>
+                <ServiceLogo />
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.0, duration: 0.5 }}
+          >
+            <LoginButtons handleLogin={handleLogin} />
+          </motion.div>
         </div>
-        <div className={`sticky bottom-6 ${paddingClass} flex flex-col gap-4`}>
-          <LoginButton
-            provider='kakao'
-            handleLoginButton={() => handleLogin('kakao')}
-            label='카카오로 3초 만에 시작하기'
-          />
-          <LoginButton
-            provider='naver'
-            handleLoginButton={() => handleLogin('naver')}
-            label='네이버로 시작하기'
-          />
-          <LoginButton
-            provider='google'
-            handleLoginButton={() => handleLogin('google')}
-            label='Google로 시작하기'
-          />
-        </div>
-      </motion.div>
+      </div>
     </>
   );
 };

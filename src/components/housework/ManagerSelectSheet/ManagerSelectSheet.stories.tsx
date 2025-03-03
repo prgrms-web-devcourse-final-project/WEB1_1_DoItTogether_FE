@@ -19,9 +19,6 @@ const meta = {
       description: '선택된 멤버',
       control: 'number',
     },
-    handleDoneClick: {
-      description: '선택 후 처리하는 함수',
-    },
   },
 } satisfies Meta<typeof ManagerSelectSheet>;
 

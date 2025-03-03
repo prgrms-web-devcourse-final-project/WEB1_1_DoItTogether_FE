@@ -10,6 +10,7 @@ interface AddHouseWorkState {
   targetHousework: Housework | undefined;
   members: User[];
   isMemberLoading: boolean;
+  status: string;
 }
 
 interface AddHouseWorkActions {
@@ -19,6 +20,7 @@ interface AddHouseWorkActions {
   setTargetHousework: (targetHousework: Housework | undefined) => void;
   setMembers: (members: User[]) => void;
   setIsMemberLoading: (isMemberLoading: boolean) => void;
+  setStatus: (status: string) => void;
   reset: () => void;
 }
 
@@ -29,6 +31,7 @@ const initialState: AddHouseWorkState = {
   targetHousework: undefined,
   members: [],
   isMemberLoading: true,
+  status: 'SELECT',
 };
 
 type State = AddHouseWorkState & AddHouseWorkActions;
@@ -44,6 +47,7 @@ const useAddHouseWorkStore = create<State>()(
       setTargetHousework: targetHousework => set({ targetHousework }),
       setMembers: members => set({ members }),
       setIsMemberLoading: isMemberLoading => set({ isMemberLoading }),
+      setStatus: status => set({ status }),
       reset: () => set(initialState),
     }),
     {

@@ -16,7 +16,11 @@ const ServiceLogo = () => {
   };
 
   return (
-    <motion.section variants={item} aria-label='서비스 로고' className='relative flex-1'>
+    <motion.section
+      variants={item}
+      aria-label='서비스 로고'
+      className='relative h-[310px] w-[310px]'
+    >
       <div className='absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2'>
         <LottieIcon />
       </div>
