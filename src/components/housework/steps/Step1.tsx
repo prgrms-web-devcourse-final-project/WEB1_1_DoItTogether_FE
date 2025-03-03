@@ -39,6 +39,7 @@ const Step1 = ({
   const handleDueDateClick = () => {
     setDueDateSheetOpen(true);
   };
+
   return (
     <>
       <HouseworkForm

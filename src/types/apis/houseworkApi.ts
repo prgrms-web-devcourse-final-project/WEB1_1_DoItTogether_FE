@@ -29,7 +29,9 @@ interface HouseworkCommonReq
     Pick<Housework, 'category' | 'task' | 'startDate' | 'startTime' | 'userId'> {}
 
 // 집안일 추가
-export interface AddHouseworkReq extends HouseworkCommonReq {}
+export interface AddHouseworkReq extends HouseworkCommonReq {
+  status: string;
+}
 
 export interface AddHouseworkRes extends BaseRes {
   result: {};
@@ -45,7 +47,9 @@ export interface GetHouseworkByIdRes extends BaseRes {
 }
 
 // 집안일 수정
-export interface PutHouseworkReq extends HouseworkCommonReq, Pick<Housework, 'houseworkId'> {}
+export interface PutHouseworkReq extends HouseworkCommonReq, Pick<Housework, 'houseworkId'> {
+  status: string;
+}
 
 export interface PutHouseworkRes extends BaseRes {
   result: {};
@@ -118,5 +122,30 @@ export interface IncompleteScoreResponse {
 export interface GetWeeklyIncompleteRes extends BaseRes {
   result: {
     incompleteScoreResponses: Array<IncompleteScoreResponse>;
+  };
+}
+
+//담당자 AI 조회
+
+export interface PostAssignHouseworkAIReq extends Pick<Common, 'channelId'> {
+  houseworkName: string;
+}
+
+export interface PostAssignHouseworkAIRes extends BaseRes {
+  result: {
+    userId: number;
+    houseworkName: string;
+    status: string;
+  };
+}
+
+//타겟 유저의 성향 조회
+export interface GetTargetUserIdReq {
+  targetUserId: number;
+}
+
+export interface GetTargetUserIdRes extends BaseRes {
+  result: {
+    keywords: string[];
   };
 }

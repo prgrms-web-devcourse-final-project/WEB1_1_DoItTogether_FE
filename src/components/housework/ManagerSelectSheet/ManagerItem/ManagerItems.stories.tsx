@@ -50,12 +50,15 @@ const dummyMembers: User[] = [
 
 const ManagerSelectWithState = () => {
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
+  const [isAiCardOpen, setIsAiCardOpen] = useState(false);
 
   return (
     <ManagerItems
       selectedValue={selectedMember}
       setSelectedValue={setSelectedMember}
       members={dummyMembers}
+      isAiCardOpen={isAiCardOpen}
+      setIsAiCardOpen={setIsAiCardOpen}
     />
   );
 };

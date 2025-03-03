@@ -80,7 +80,7 @@ const AddHouseworkPage = ({}) => {
             category={category}
           />
         ) : (
-          <Step2 />
+          <Step2 task={task} />
         ))}
 
       <ActionButton
